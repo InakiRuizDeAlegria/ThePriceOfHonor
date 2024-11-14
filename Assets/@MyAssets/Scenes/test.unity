@@ -2883,7 +2883,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3701202431252008202, guid: 1b6d9920203cf204ca025db14635a195,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1922515212}
+      addedObject: {fileID: 1922515215}
   m_SourcePrefab: {fileID: 100100000, guid: 1b6d9920203cf204ca025db14635a195, type: 3}
 --- !u!4 &1922515202 stripped
 Transform:
@@ -3103,7 +3103,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1922515212
+--- !u!114 &1922515215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3115,7 +3115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711f3ed4689fac04283810184625a2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 1769337597633466025, guid: 54ba44d4ecd83324991be29cf49b127d, type: 3}
+  arrow: {fileID: 2670281301323849089, guid: 54ba44d4ecd83324991be29cf49b127d, type: 3}
   notch: {fileID: 1922515203}
 --- !u!1 &1981470400
 GameObject:
