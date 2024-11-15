@@ -7,13 +7,17 @@ public class Arrow : MonoBehaviour
     public float speed = 10f;
     public Transform tip;
 
-    private Rigidbody rigidbody;
+    private Rigidbody arrowRigidbody ;
     private bool inAir = false;
     private Vector3 lastPosition = Vector3.zero;
+    private ParticleSystem arrowParticleSystem;
+    private TrailRenderer trailRenderer;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        arrowRigidbody  = GetComponent<Rigidbody>();
+        arrowParticleSystem = GetComponentInChildren<ParticleSystem>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
         PullInteraction.PullActionReleased += Release;
 
         Stop();
@@ -32,11 +36,13 @@ public class Arrow : MonoBehaviour
         SetPhysics(true);
 
         Vector3 force = transform.forward * value * speed;
-        rigidbody.AddForce(force, ForceMode.Impulse);
+        arrowRigidbody .AddForce(force, ForceMode.Impulse);
 
         StartCoroutine(RotateWithVelocity());
 
         lastPosition = tip.position;
+        arrowParticleSystem.Play();
+        trailRenderer.emitting = true;
     }
 
     IEnumerator RotateWithVelocity()
@@ -44,7 +50,7 @@ public class Arrow : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         while (inAir)
         {
-            Quaternion newRotation = Quaternion.LookRotation(rigidbody.velocity, transform.up);
+            Quaternion newRotation = Quaternion.LookRotation(arrowRigidbody .velocity, transform.up);
             transform.rotation = newRotation;
             yield return null;
         }
@@ -67,9 +73,9 @@ public class Arrow : MonoBehaviour
             {
                 if (hitInfo.transform.TryGetComponent(out Rigidbody body))
                 {
-                    rigidbody.interpolation = RigidbodyInterpolation.None;
+                    arrowRigidbody .interpolation = RigidbodyInterpolation.None;
                     transform.parent = hitInfo.transform;
-                    body.AddForce(rigidbody.velocity, ForceMode.Impulse);
+                    body.AddForce(arrowRigidbody .velocity, ForceMode.Impulse);
                 }
                 Stop();
             }
@@ -80,11 +86,13 @@ public class Arrow : MonoBehaviour
     {
         inAir = false;
         SetPhysics(false);
+        arrowParticleSystem.Stop();
+        trailRenderer.emitting = false;
     }
 
     private void SetPhysics(bool usePhysics)
     {
-        rigidbody.useGravity = usePhysics;
-        rigidbody.isKinematic = !usePhysics;
+        arrowRigidbody .useGravity = usePhysics;
+        arrowRigidbody .isKinematic = !usePhysics;
     }
 }

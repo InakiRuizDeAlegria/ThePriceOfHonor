@@ -13,11 +13,13 @@ public class PullInteraction : XRBaseInteractable
 
     private LineRenderer _lineRenderer;
     private IXRSelectInteractor pullingInteractor = null;
+    private AudioSource audioSource;
 
     protected override void Awake()
     {
         base.Awake();
         _lineRenderer = GetComponent<LineRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetPullInteractor(SelectEnterEventArgs args)
@@ -32,6 +34,7 @@ public class PullInteraction : XRBaseInteractable
         pullAmount = 0f;
         notch.transform.localPosition = new Vector3(notch.transform.localPosition.x, notch.transform.localPosition.y, 0f);
         UpdateString();
+        PlayReleaseSound();
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -65,4 +68,19 @@ public class PullInteraction : XRBaseInteractable
         notch.transform.localPosition = new Vector3(notch.transform.localPosition.x, notch.transform.localPosition.y, linePosition.z + 0.2f);
         _lineRenderer.SetPosition(1, linePosition);
     }
+
+    private void HapticFeedback()
+    {
+        if ( pullingInteractor != null)
+        {
+            ActionBasedController currentController = pullingInteractor.transform.gameObject.GetComponent<ActionBasedController>();
+            currentController.SendHapticImpulse(pullAmount, 0.1f);
+        }
+    }
+
+    private void PlayReleaseSound()
+    {
+        audioSource.Play();
+    }
+
 }
