@@ -13,13 +13,6 @@ public class sliceObject : MonoBehaviour
     public Material crossSectionMaterial;
     public float cutForce = 2000;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         bool hasHit = Physics.Linecast(startSlicePoint.position, endSlicePoint.position, out RaycastHit hit, sliceableLayer);
@@ -41,17 +34,20 @@ public class sliceObject : MonoBehaviour
         if (hull != null)
         {
             GameObject upperHull = hull.CreateUpperHull(target, crossSectionMaterial);
-            SetupSlicedComponent(upperHull);
+            SetupSlicedComponent(upperHull, target);
 
             GameObject lowerHull = hull.CreateLowerHull(target, crossSectionMaterial);
-            SetupSlicedComponent(lowerHull);
+            SetupSlicedComponent(lowerHull, target);
 
             Destroy(target);
         }
     }
 
-    public void SetupSlicedComponent(GameObject slicedObject)
+    public void SetupSlicedComponent(GameObject slicedObject, GameObject originalObject)
     {
+        slicedObject.transform.position = originalObject.transform.position;
+        slicedObject.transform.rotation = originalObject.transform.rotation;
+
         Rigidbody rb = slicedObject.AddComponent<Rigidbody>();
         MeshCollider collider = slicedObject.AddComponent<MeshCollider>();
         collider.convex = true;
