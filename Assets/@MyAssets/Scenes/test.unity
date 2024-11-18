@@ -1396,9 +1396,9 @@ GameObject:
   m_Component:
   - component: {fileID: 924881161}
   - component: {fileID: 924881166}
-  - component: {fileID: 924881168}
   - component: {fileID: 924881167}
   - component: {fileID: 924881169}
+  - component: {fileID: 924881170}
   m_Layer: 0
   m_Name: Right Controller
   m_TagString: Untagged
@@ -1686,7 +1686,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &924881168
+--- !u!114 &924881169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924881160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38aeae1f3549c934795f9c0f7499e555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &924881170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1703,7 +1715,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 2
+    m_Bits: 4294967295
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -1776,20 +1788,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_PhysicsTriggerInteraction: 1
---- !u!114 &924881169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924881160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38aeae1f3549c934795f9c0f7499e555, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  directInteractor: {fileID: 924881168}
-  rayInteractor: {fileID: 36862304}
 --- !u!1 &937945084
 GameObject:
   m_ObjectHideFlags: 0
