@@ -36,7 +36,7 @@ public class Arrow : MonoBehaviour
         SetPhysics(true);
 
         Vector3 force = transform.forward * value * speed;
-        arrowRigidbody .AddForce(force, ForceMode.Impulse);
+        arrowRigidbody.AddForce(force, ForceMode.Impulse);
 
         StartCoroutine(RotateWithVelocity());
 
@@ -50,7 +50,7 @@ public class Arrow : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         while (inAir)
         {
-            Quaternion newRotation = Quaternion.LookRotation(arrowRigidbody .velocity, transform.up);
+            Quaternion newRotation = Quaternion.LookRotation(arrowRigidbody.velocity, transform.up);
             transform.rotation = newRotation;
             yield return null;
         }
