@@ -5,7 +5,13 @@ using UnityEngine;
 public class Porton : MonoBehaviour
 {
     public int vidaMaxima = 5000;
+    public static Porton instancia;
     private int vidaActual;
+
+    private void Awake()
+    {
+        instancia = this;
+    }
 
     void Start()
     {
@@ -40,4 +46,10 @@ public class Porton : MonoBehaviour
     {
         return vidaActual;
     }
+
+    public bool EstaActivo()
+    {
+        return gameObject.activeInHierarchy;
+    }
+
 }

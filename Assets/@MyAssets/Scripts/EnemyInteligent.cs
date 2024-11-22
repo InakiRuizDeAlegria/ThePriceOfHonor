@@ -12,10 +12,15 @@ public class EnemyInteligent : MonoBehaviour
     public GameObject portonObject;
     public Porton porton;
 
+    void Start()
+    {
+        porton = Porton.instancia;
+    }
+
     void Update()
     {
         IA.speed = Velocity;
-        if (portonObject.activeInHierarchy)
+        if (porton != null && porton.EstaActivo())
         {
             IA.SetDestination(portonObject.transform.position);
         }
