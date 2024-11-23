@@ -5,9 +5,11 @@ public class Enemigo : MonoBehaviour
 {
     public SistemaOleadas sistemaOleadas;
     public float vidaMaxima = 100f;
+    public string capaCorte = "Sliceable";
 
     private float vidaActual;
     private bool estaMuerto = false;
+    private bool habilitarCorte = false;
 
     void Start()
     {
@@ -21,8 +23,11 @@ public class Enemigo : MonoBehaviour
         vidaActual -= cantidad;
         Debug.Log($"{gameObject.name} recibió {cantidad} de daño. Vida restante: {vidaActual}");
 
-        if (vidaActual <= 0)
+        if (vidaActual <= 0 && !habilitarCorte)
         {
+            CambiarACapaSliceable();
+            habilitarCorte = true;
+            Debug.Log("ya se puede cortar");
             Morir();
         }
     }
@@ -34,7 +39,29 @@ public class Enemigo : MonoBehaviour
         estaMuerto = true;
         Debug.Log($"{gameObject.name} ha muerto.");
 
-        StartCoroutine(DesactivarDespuesDeTiempo(2f));
+        StartCoroutine(DesactivarDespuesDeTiempo(0.1f));
+    }
+
+    void CambiarACapaSliceable()
+    {
+        int sliceableLayer = LayerMask.NameToLayer(capaCorte);
+
+        if (sliceableLayer == -1)
+        {
+            return;
+        }
+
+        CambiarLayerRecursivamente(gameObject, sliceableLayer);
+    }
+
+    void CambiarLayerRecursivamente(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+
+        foreach (Transform child in obj.transform)
+        {
+            CambiarLayerRecursivamente(child.gameObject, layer);
+        }
     }
 
     IEnumerator DesactivarDespuesDeTiempo(float tiempo)
