@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour
 {
     public float speed = 10f;
     public Transform tip;
+    public float danio = 15f;
 
     private Rigidbody arrowRigidbody ;
     private bool inAir = false;
@@ -95,4 +96,15 @@ public class Arrow : MonoBehaviour
         arrowRigidbody .useGravity = usePhysics;
         arrowRigidbody .isKinematic = !usePhysics;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Enemigo enemigo = other.GetComponent<Enemigo>();
+        if (enemigo != null)
+        {
+            enemigo.RecibirDanio(danio);
+            Destroy(gameObject);
+        }
+    }
+
 }
