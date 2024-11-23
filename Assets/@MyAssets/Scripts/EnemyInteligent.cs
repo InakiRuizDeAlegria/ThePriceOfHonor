@@ -14,6 +14,7 @@ public class EnemyInteligent : MonoBehaviour
     public Porton porton;
 
     private bool haSidoVisto = false;
+    private bool haAtacado = false;
 
     void Start()
     {
@@ -21,18 +22,25 @@ public class EnemyInteligent : MonoBehaviour
     }
 
     void Update()
+{
+    if (CompareTag("aldeano"))
     {
-        if (CompareTag("aldeano"))
+        IA.speed = Velocity;
+        GestionarAldeano();
+    }
+    else if (CompareTag("medico"))
+    {
+        if (haSidoVisto || haAtacado)
         {
             IA.speed = Velocity;
-            GestionarAldeano();
         }
-        else if (CompareTag("medico"))
+        else
         {
             IA.speed = velocidadMedico;
-            GestionarMedico();
         }
+        GestionarMedico();
     }
+}
 
     void GestionarAldeano()
     {
@@ -57,23 +65,20 @@ public class EnemyInteligent : MonoBehaviour
 
     void GestionarMedico()
     {
+        float distanciaAlJugador = Vector3.Distance(transform.position, target.position);
+        IA.SetDestination(target.position);
         if (!haSidoVisto)
         {
             anim.SetBool("aSidoVisto", false);
-            IA.SetDestination(target.position);
             DetectarJugador();
         }
-        else
-        {
-            anim.SetBool("aSidoVisto", true);
-            IA.SetDestination(target.position);
-        }
-
-        if (IA.velocity == Vector3.zero && haSidoVisto)
+        if (distanciaAlJugador <= 2.0f)
         {
             anim.SetBool("estaAtacando", true);
+            haAtacado = true;
+            haSidoVisto = true;
         }
-        else
+        else if (distanciaAlJugador > 2.0f)
         {
             anim.SetBool("estaAtacando", false);
         }
@@ -87,22 +92,47 @@ public class EnemyInteligent : MonoBehaviour
         }
     }
 
+    public void hitMedico()
+    {
+        //golpea siempre al jugador
+    }
+
     void DetectarJugador()
     {
-        Vector3 direccionAlJugador = Camera.main.transform.position - transform.position;
-        float angulo = Vector3.Angle(transform.forward, direccionAlJugador);
+        if (Camera.main == null)
+        {
+            return;
+        }
+
+        Vector3 direccionAlMedico = transform.position - Camera.main.transform.position;
+
+        float angulo = Vector3.Angle(Camera.main.transform.forward, direccionAlMedico);
 
         if (angulo < 60f)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, direccionAlJugador.normalized, out hit, 20f))
+            if (Physics.Raycast(Camera.main.transform.position, direccionAlMedico.normalized, out hit, 20f))
             {
-                if (hit.collider.CompareTag("Player"))
+                Debug.Log($"El raycast impactó en: {hit.collider.gameObject.name}");
+
+                if (hit.collider.gameObject == this.gameObject)
                 {
                     haSidoVisto = true;
                     anim.SetBool("aSidoVisto", true);
+                    Debug.Log("El médico ha sido visto por el jugador");
+                }
+                else
+                {
+                    Debug.Log("El raycast impactó en otro objeto, no en el médico.");
                 }
             }
         }
+        else
+        {
+            Debug.Log("El médico está fuera del campo de visión del jugador.");
+        }
     }
+
+
+
 }

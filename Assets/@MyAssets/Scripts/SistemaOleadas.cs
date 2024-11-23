@@ -11,12 +11,20 @@ public class SistemaOleadas : MonoBehaviour
         public Transform[] puntosSpawn;
     }
 
+    [System.Serializable]
+    public class ConfiguracionEnemigo
+    {
+        public GameObject prefabEnemigo;
+        public bool esInterior;
+        public int cantidadInicial;
+        public float probabilidad; // Para determinar la frecuencia de aparición
+    }
+
     public List<Zona> zonasExteriores;
     public List<Zona> zonasInteriores;
-    public GameObject prefabEnemigo;
-    public int numeroInicialDeEnemigos = 3;
+    public List<ConfiguracionEnemigo> configuracionesEnemigos;
+
     public float tiempoEntreOleadas = 5f;
-    public bool usarZonaInterior;
 
     private int oleadaActual = 0;
     private int enemigosRestantes = 0;
@@ -39,22 +47,29 @@ public class SistemaOleadas : MonoBehaviour
     void IniciarOleada()
     {
         oleadaActual++;
-        int cantidadDeEnemigos = numeroInicialDeEnemigos + oleadaActual - 1;
-        enemigosRestantes = cantidadDeEnemigos;
         estaIniciandoOleada = false;
 
-        Debug.Log($"Iniciando oleada {oleadaActual} con {cantidadDeEnemigos} enemigos.");
+        Debug.Log($"Iniciando oleada {oleadaActual}.");
 
-        Zona zonaSeleccionada = SeleccionarZona();
-        if (zonaSeleccionada != null)
+        // Generar enemigos basados en configuraciones
+        foreach (var configuracion in configuracionesEnemigos)
         {
-            GenerarEnemigosEnZona(zonaSeleccionada, cantidadDeEnemigos);
+            int cantidadDeEnemigos = configuracion.cantidadInicial + oleadaActual - 1;
+
+            // Elegir la zona correspondiente (interior o exterior)
+            Zona zonaSeleccionada = SeleccionarZona(configuracion.esInterior);
+
+            if (zonaSeleccionada != null)
+            {
+                GenerarEnemigosEnZona(configuracion.prefabEnemigo, zonaSeleccionada, cantidadDeEnemigos, configuracion.probabilidad);
+                enemigosRestantes += cantidadDeEnemigos;
+            }
         }
     }
 
-    Zona SeleccionarZona()
+    Zona SeleccionarZona(bool esInterior)
     {
-        List<Zona> zonasDisponibles = usarZonaInterior && zonasInteriores.Count > 0 
+        List<Zona> zonasDisponibles = esInterior && zonasInteriores.Count > 0 
             ? zonasInteriores 
             : zonasExteriores;
 
@@ -68,10 +83,13 @@ public class SistemaOleadas : MonoBehaviour
         return zonasDisponibles[indiceAleatorio];
     }
 
-    void GenerarEnemigosEnZona(Zona zona, int cantidad)
+    void GenerarEnemigosEnZona(GameObject prefabEnemigo, Zona zona, int cantidad, float probabilidad)
     {
         for (int i = 0; i < cantidad; i++)
         {
+            float aleatorio = Random.value;
+            if (aleatorio > probabilidad) continue;
+
             Transform puntoSpawn = zona.puntosSpawn[Random.Range(0, zona.puntosSpawn.Length)];
             Vector3 posicionAleatoria = puntoSpawn.position + new Vector3(
                 Random.Range(-1f, 1f), 
