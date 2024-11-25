@@ -3,34 +3,33 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class InteractorSwitcher : MonoBehaviour
 {
+    public GameObject directInteractorObject;
+    public GameObject rayInteractorObject;
+
     private XRDirectInteractor directInteractor;
     private XRRayInteractor rayInteractor;
 
     private void Awake()
     {
-        directInteractor = gameObject.GetComponent<XRDirectInteractor>();
-        rayInteractor = gameObject.GetComponent<XRRayInteractor>();
-
-        if (directInteractor == null)
+        if (directInteractorObject != null)
         {
-            Debug.Log("XRDirectInteractor no encontrado, se agrega uno nuevo.");
-            directInteractor = gameObject.AddComponent<XRDirectInteractor>();
+            directInteractor = directInteractorObject.GetComponent<XRDirectInteractor>();
         }
 
-        if (rayInteractor == null)
+        if (rayInteractorObject != null)
         {
-            Debug.Log("XRRayInteractor no encontrado, se agrega uno nuevo.");
-            rayInteractor = gameObject.AddComponent<XRRayInteractor>();
+            rayInteractor = rayInteractorObject.GetComponent<XRRayInteractor>();
         }
 
-        directInteractor.enabled = false;
-        rayInteractor.enabled = false;
-    }
+        if (directInteractor != null)
+        {
+            directInteractor.enabled = true;
+        }
 
-    private void Start()
-    {
-        directInteractor.enabled = true;
-        rayInteractor.enabled = false;
+        if (rayInteractor != null)
+        {
+            rayInteractor.enabled = false;
+        }
     }
 
     private void Update()
@@ -43,21 +42,18 @@ public class InteractorSwitcher : MonoBehaviour
 
     private void SwitchInteractor()
     {
-        if (directInteractor == null || rayInteractor == null)
+        if (directInteractor != null && rayInteractor != null)
         {
-            Debug.LogError("Los interactores no están correctamente inicializados.");
-            return;
-        }
-
-        if (directInteractor.enabled)
-        {
-            directInteractor.enabled = false;
-            rayInteractor.enabled = true;
-        }
-        else
-        {
-            directInteractor.enabled = true;
-            rayInteractor.enabled = false;
+            if (directInteractor.enabled)
+            {
+                directInteractor.enabled = false;
+                rayInteractor.enabled = true;
+            }
+            else
+            {
+                directInteractor.enabled = true;
+                rayInteractor.enabled = false;
+            }
         }
     }
 }
