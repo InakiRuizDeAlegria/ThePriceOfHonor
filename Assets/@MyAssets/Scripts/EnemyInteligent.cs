@@ -111,7 +111,7 @@ public class EnemyInteligent : MonoBehaviour
         if (angulo < 60f)
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, direccionAlMedico.normalized, out hit, 20f))
+            if (Physics.Raycast(Camera.main.transform.position, direccionAlMedico.normalized, out hit, 50f))
             {
                 Debug.Log($"El raycast impactó en: {hit.collider.gameObject.name}");
 
