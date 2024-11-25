@@ -12,9 +12,13 @@ public class EnemyInteligent : MonoBehaviour
     public Animator anim;
     public GameObject portonObject;
     public Porton porton;
+    public float rangoDeteccion = 80f;
+    public float anguloDeteccion = 60f;
+    public float distanciaEscondite = 80f;
 
     private bool haSidoVisto = false;
-    private bool haAtacado = false;
+    private bool escondido = false;
+    private Transform esconditeActual;
 
     void Start()
     {
@@ -22,25 +26,28 @@ public class EnemyInteligent : MonoBehaviour
     }
 
     void Update()
-{
-    if (CompareTag("aldeano"))
     {
-        IA.speed = Velocity;
-        GestionarAldeano();
-    }
-    else if (CompareTag("medico"))
-    {
-        if (haSidoVisto || haAtacado)
+        if (CompareTag("medico"))
+        {
+            if (!escondido)
+            {
+                IA.speed = velocidadMedico;
+                DetectarJugador();
+                GestionarMedico();
+            }
+            else
+            {
+                IA.speed = Velocity;
+                DetectarJugador();
+                GestionarMedico();
+            }
+        }
+        else if (CompareTag("aldeano"))
         {
             IA.speed = Velocity;
+            GestionarAldeano();
         }
-        else
-        {
-            IA.speed = velocidadMedico;
-        }
-        GestionarMedico();
     }
-}
 
     void GestionarAldeano()
     {
@@ -65,20 +72,21 @@ public class EnemyInteligent : MonoBehaviour
 
     void GestionarMedico()
     {
-        float distanciaAlJugador = Vector3.Distance(transform.position, target.position);
-        IA.SetDestination(target.position);
         if (!haSidoVisto)
         {
             anim.SetBool("aSidoVisto", false);
-            DetectarJugador();
+            IA.SetDestination(target.position);
         }
-        if (distanciaAlJugador <= 2.0f)
+        else
+        {
+            BuscarEscondite();
+        }
+
+        if (IA.velocity == Vector3.zero)
         {
             anim.SetBool("estaAtacando", true);
-            haAtacado = true;
-            haSidoVisto = true;
         }
-        else if (distanciaAlJugador > 2.0f)
+        else
         {
             anim.SetBool("estaAtacando", false);
         }
@@ -92,47 +100,64 @@ public class EnemyInteligent : MonoBehaviour
         }
     }
 
-    public void hitMedico()
-    {
-        //golpea siempre al jugador
-    }
 
-    void DetectarJugador()
+     void DetectarJugador()
     {
-        if (Camera.main == null)
-        {
-            return;
-        }
+        if (Camera.main == null) return;
 
         Vector3 direccionAlMedico = transform.position - Camera.main.transform.position;
-
         float angulo = Vector3.Angle(Camera.main.transform.forward, direccionAlMedico);
 
-        if (angulo < 60f)
+        if (angulo < anguloDeteccion && direccionAlMedico.magnitude < rangoDeteccion)
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, direccionAlMedico.normalized, out hit, 50f))
+            if (Physics.Raycast(Camera.main.transform.position, direccionAlMedico.normalized, out hit, rangoDeteccion))
             {
-                Debug.Log($"El raycast impactó en: {hit.collider.gameObject.name}");
-
                 if (hit.collider.gameObject == this.gameObject)
                 {
                     haSidoVisto = true;
                     anim.SetBool("aSidoVisto", true);
-                    Debug.Log("El médico ha sido visto por el jugador");
-                }
-                else
-                {
-                    Debug.Log("El raycast impactó en otro objeto, no en el médico.");
                 }
             }
         }
-        else
+    }
+
+    void BuscarEscondite()
+    {
+        Collider[] posiblesEscondites = Physics.OverlapSphere(transform.position, distanciaEscondite);
+        Transform mejorEscondite = null;
+        float distanciaMinima = Mathf.Infinity;
+
+        foreach (Collider col in posiblesEscondites)
         {
-            Debug.Log("El médico está fuera del campo de visión del jugador.");
+            if (col.CompareTag("Refugio"))
+            {
+                float distancia = Vector3.Distance(transform.position, col.transform.position);
+                if (distancia < distanciaMinima)
+                {
+                    distanciaMinima = distancia;
+                    mejorEscondite = col.transform;
+                }
+            }
+        }
+
+        if (mejorEscondite != null)
+        {
+            escondido = true;
+            esconditeActual = mejorEscondite;
+            IA.SetDestination(esconditeActual.position);
         }
     }
 
-
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("El médico ha llegado al escondite.");
+        if (escondido && collision.collider.CompareTag("Refugio") && collision.transform == esconditeActual)
+        {
+            haSidoVisto = false;
+            escondido = false;
+            Debug.Log("El médico ha llegado al escondite.");
+        }
+    }
 
 }
