@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class InteractorSwitcher : MonoBehaviour
@@ -8,6 +9,8 @@ public class InteractorSwitcher : MonoBehaviour
 
     private XRDirectInteractor directInteractor;
     private XRRayInteractor rayInteractor;
+
+    public InputActionReference switchInteractorAction;
 
     private void Awake()
     {
@@ -30,14 +33,25 @@ public class InteractorSwitcher : MonoBehaviour
         {
             rayInteractor.enabled = false;
         }
+
+
+        if (switchInteractorAction != null)
+        {
+            switchInteractorAction.action.performed += OnSwitchInteractor;
+        }
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (switchInteractorAction != null)
         {
-            SwitchInteractor();
+            switchInteractorAction.action.performed -= OnSwitchInteractor;
         }
+    }
+
+    private void OnSwitchInteractor(InputAction.CallbackContext context)
+    {
+        SwitchInteractor();
     }
 
     private void SwitchInteractor()
