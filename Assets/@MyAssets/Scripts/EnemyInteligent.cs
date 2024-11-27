@@ -29,17 +29,27 @@ public class EnemyInteligent : MonoBehaviour
     {
         if (CompareTag("medico"))
         {
+            DetectarJugador();
+                GestionarMedico();
             if (!escondido)
             {
                 IA.speed = velocidadMedico;
-                DetectarJugador();
-                GestionarMedico();
+            }
+            else if (escondido)
+            {
+                IA.speed = Velocity;
+            }
+            else if (haSidoVisto)
+            {
+                IA.speed = Velocity;
+            }
+            else if (!haSidoVisto)
+            {
+                IA.speed = velocidadMedico;
             }
             else
             {
                 IA.speed = Velocity;
-                DetectarJugador();
-                GestionarMedico();
             }
         }
         else if (CompareTag("aldeano"))
@@ -79,7 +89,16 @@ public class EnemyInteligent : MonoBehaviour
         }
         else
         {
-            BuscarEscondite();
+            Vector3 direccionAlJugador = transform.position - Camera.main.transform.position;
+            if (direccionAlJugador.magnitude <= 5f)
+            {
+                IA.SetDestination(Camera.main.transform.position);
+                anim.SetBool("aSidoVisto", true);
+            }
+            else
+            {
+                BuscarEscondite();
+            }
         }
 
         if (IA.velocity == Vector3.zero)
@@ -92,6 +111,7 @@ public class EnemyInteligent : MonoBehaviour
         }
     }
 
+
     public void hit()
     {
         if (porton != null)
@@ -101,7 +121,7 @@ public class EnemyInteligent : MonoBehaviour
     }
 
 
-     void DetectarJugador()
+    void DetectarJugador()
     {
         if (Camera.main == null) return;
 
@@ -117,10 +137,18 @@ public class EnemyInteligent : MonoBehaviour
                 {
                     haSidoVisto = true;
                     anim.SetBool("aSidoVisto", true);
+
+                    if (direccionAlMedico.magnitude <= 5f)
+                    {
+                        IA.SetDestination(Camera.main.transform.position);
+                        anim.SetBool("aSidoVisto", true);
+                        escondido = false;
+                    }
                 }
             }
         }
     }
+
 
     void BuscarEscondite()
     {
@@ -158,15 +186,15 @@ public class EnemyInteligent : MonoBehaviour
         {
             escondido = true;
             esconditeActual = mejorEscondite;
+            anim.SetBool("aSidoVisto", true);
             IA.SetDestination(puntoOculto);
-            Debug.Log($"El médico se dirige a un punto oculto del escondite: {puntoOculto}");
         }
         else
         {
             escondido = false;
             Vector3 direccionAleatoria = transform.position + Random.insideUnitSphere * 10f;
+            anim.SetBool("aSidoVisto", true);
             IA.SetDestination(direccionAleatoria);
-            Debug.Log("No se encontró un escondite fuera de la vista. Moviéndose aleatoriamente.");
         }
     }
 
@@ -175,13 +203,11 @@ public class EnemyInteligent : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Entrando en colisión con: {other.name}");
 
         if (escondido && other.CompareTag("Refugio") && other.transform == esconditeActual)
         {
             haSidoVisto = false;
             escondido = false;
-            Debug.Log("Médico se ha escondido correctamente en el refugio.");
         }
     }
 
