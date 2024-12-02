@@ -220,7 +220,7 @@ public class EnemyInteligent : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            hit(collision.gameObject);
+            Hit(collision.gameObject);
         }
     }
 }
