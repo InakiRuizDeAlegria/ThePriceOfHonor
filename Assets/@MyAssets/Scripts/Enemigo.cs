@@ -21,13 +21,11 @@ public class Enemigo : MonoBehaviour
         if (estaMuerto) return;
 
         vidaActual -= cantidad;
-        Debug.Log($"{gameObject.name} recibió {cantidad} de daño. Vida restante: {vidaActual}");
 
         if (vidaActual <= 0 && !habilitarCorte)
         {
             CambiarACapaSliceable();
             habilitarCorte = true;
-            Debug.Log("ya se puede cortar");
             Morir();
         }
     }
@@ -37,8 +35,7 @@ public class Enemigo : MonoBehaviour
         if (estaMuerto) return;
 
         estaMuerto = true;
-        Debug.Log($"{gameObject.name} ha muerto.");
-
+        
         StartCoroutine(DesactivarDespuesDeTiempo(0.1f));
     }
 

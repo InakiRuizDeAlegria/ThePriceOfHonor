@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
+    public float armor = 0;
     public float currentHealth;
     public bool isDead = false;
 
@@ -17,7 +18,13 @@ public class CharacterHealth : MonoBehaviour
     {
         if (isDead) return;
 
-        currentHealth -= damage;
+        if (armor != 0) 
+        {
+            currentHealth -= damage * armor;
+        } else
+        {
+            currentHealth -= damage;
+        }
 
         if (currentHealth <= 0 && !isDead)
         {
