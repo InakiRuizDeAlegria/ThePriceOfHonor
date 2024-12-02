@@ -12,6 +12,7 @@ public class MenuManagerTexto : MonoBehaviour
     public GameObject panelOpcion1;
     public GameObject panelOpcion2;
     public GameObject panelOpcion3;
+    public int dineroTotal = 1000;
 
     private string opcionSeleccionada = "";
 
