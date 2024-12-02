@@ -14,4 +14,19 @@ public class BarraVida : MonoBehaviour
         barraVida.fillAmount = vidaActual / vidadMax;
         
     }
+
+    public void RecibirDanio(float cantidad)
+    {
+        vidaActual -= cantidad;
+        if (vidaActual < 0)
+        {
+            vidaActual = 0;
+            Morir();
+        }
+    }
+
+    void Morir()
+    {
+        Debug.Log("El jugador ha muerto");
+    }
 }

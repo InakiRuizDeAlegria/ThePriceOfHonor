@@ -211,5 +211,15 @@ public class EnemyInteligent : MonoBehaviour
         }
     }
 
-
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            BarraVida barraVidaJugador = collision.gameObject.GetComponent<BarraVida>();
+            if (barraVidaJugador != null)
+            {
+                barraVidaJugador.RecibirDanio(10);
+            }
+        }
+    }
 }
