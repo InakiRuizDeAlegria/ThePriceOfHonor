@@ -6,13 +6,18 @@ using UnityEngine.UI;
 public class BarraVida : MonoBehaviour
 {
     public Image barraVida;
-    public float vidaActual;
     public float vidadMax;
+
+    private float vidaActual;
+
+    void Start()
+    {
+        vidaActual = vidadMax;
+    }
 
     void Update()
     {
         barraVida.fillAmount = vidaActual / vidadMax;
-        
     }
 
     public void RecibirDanio(float cantidad)

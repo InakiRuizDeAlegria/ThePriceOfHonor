@@ -112,9 +112,17 @@ public class EnemyInteligent : MonoBehaviour
     }
 
 
-    public void hit()
+    public void Hit(GameObject objetivo)
     {
-        if (porton != null)
+        if (objetivo.CompareTag("Player"))
+        {
+            BarraVida barraVidaJugador = objetivo.GetComponent<BarraVida>();
+            if (barraVidaJugador != null)
+            {
+                barraVidaJugador.RecibirDanio(10);
+            }
+        }
+        else if (porton != null && objetivo.CompareTag("Porton"))
         {
             porton.RecibirDanio(20);
         }
@@ -198,9 +206,6 @@ public class EnemyInteligent : MonoBehaviour
         }
     }
 
-
-
-
     void OnTriggerEnter(Collider other)
     {
 
@@ -215,11 +220,9 @@ public class EnemyInteligent : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            BarraVida barraVidaJugador = collision.gameObject.GetComponent<BarraVida>();
-            if (barraVidaJugador != null)
-            {
-                barraVidaJugador.RecibirDanio(10);
-            }
+            hit(collision.gameObject);
         }
     }
 }
+
+
