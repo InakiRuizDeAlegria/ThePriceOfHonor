@@ -1758,7 +1758,7 @@
                     "name": "",
                     "id": "703955c5-fbe6-4c13-aeb9-c85c97e32adb",
                     "path": "<XRController>{RightHand}/secondaryButton",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Generic XR Controller;Continuous Move;Noncontinuous Move",
                     "action": "InteractorSwitcher",
