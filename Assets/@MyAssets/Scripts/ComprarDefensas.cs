@@ -23,8 +23,8 @@ public class ComprarDefensas : MonoBehaviour
 
     void Start()
     {
-        portonText.text = $"1. Espada Superior - ${precioReparacion}";
-        barricada.text = $"2. Espada Inicial - ${preciobarricada}";
+        portonText.text = $"1. Reparar Portón - ${precioReparacion}";
+        barricada.text = $"2. Barricada Improvisada - ${preciobarricada}";
 
         portonText.GetComponent<Button>().onClick.AddListener(() => SeleccionarOpcion("portonText"));
         barricada.GetComponent<Button>().onClick.AddListener(() => SeleccionarOpcion("barricada"));
