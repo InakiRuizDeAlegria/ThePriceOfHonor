@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ComprarDefensas : MonoBehaviour
 {
@@ -60,7 +62,6 @@ public class ComprarDefensas : MonoBehaviour
         if (gestorMenu.dineroTotal >= precio)
         {
             gestorMenu.dineroTotal -= precio;
-            Vector3 posicionMesa = mesaTransform.position + new Vector3(0, 1, 0);
 
             if (opcionSeleccionada == "porton")
                 porton.Reparar(100);
