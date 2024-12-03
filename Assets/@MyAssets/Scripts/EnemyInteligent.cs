@@ -116,12 +116,12 @@ public class EnemyInteligent : MonoBehaviour
 
     public void Hit()
     {
-        if (jugador.CompareTag("Player"))
+        jugador = FindObjectOfType<XROrigin>();
+        if (jugador != null && jugador.CompareTag("Player"))
         {
             BarraVida barraVidaJugador = jugador.GetComponent<BarraVida>();
             if (barraVidaJugador != null)
             {
-                Debug.Log("Daño");
                 barraVidaJugador.RecibirDanio(10);
             }
         }
