@@ -13,18 +13,35 @@ public class BarraVida : MonoBehaviour
     void Start()
     {
         vidaActual = vidadMax;
+        //barraVida.GetComponent<Image>().color = new Color(70, 210, 50);
     }
 
     void Update()
     {
         barraVida.fillAmount = vidaActual / vidadMax;
+        //cambiarColor();
     }
+
+    /*private void cambiarColor()
+    {
+        if (vidaActual >= 60)
+        {
+            barraVida.GetComponent<Image>().color = new Color(70, 210, 50);
+        }
+        else if (vidaActual <= 30)
+        {
+            barraVida.GetComponent<Image>().color = new Color(210, 40, 50);
+        }
+        else
+        {
+            barraVida.GetComponent<Image>().color = new Color(220, 120, 30);
+        }
+    }*/
 
     public void RecibirDanio(float cantidad)
     {
-        Debug.Log(vidaActual);
         vidaActual -= cantidad;
-        Debug.Log(vidaActual);
+
         if (vidaActual < 0)
         {
             vidaActual = 0;
