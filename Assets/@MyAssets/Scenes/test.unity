@@ -6413,7 +6413,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_InteractionLayers:
     m_Bits: 4294967295
-  m_AttachTransform: {fileID: 6845965468437692847, guid: 38c64d92e32431443babbcf1d091113f,
+  m_AttachTransform: {fileID: 7547355137601258275, guid: 54ba44d4ecd83324991be29cf49b127d,
     type: 3}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -7102,7 +7102,7 @@ MonoBehaviour:
   m_OnSelectExited:
     m_PersistentCalls:
       m_Calls: []
-  m_SelectActionTrigger: 1
+  m_SelectActionTrigger: 2
   m_HideControllerOnSelect: 1
   m_AllowHoveredActivate: 0
   m_TargetPriorityMode: 0
@@ -13634,7 +13634,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_InteractionLayers:
     m_Bits: 4294967295
-  m_AttachTransform: {fileID: 6845965468437692847, guid: 38c64d92e32431443babbcf1d091113f,
+  m_AttachTransform: {fileID: 7547355137601258275, guid: 54ba44d4ecd83324991be29cf49b127d,
     type: 3}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -14045,7 +14045,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_InteractionLayers:
     m_Bits: 4294967295
-  m_AttachTransform: {fileID: 6845965468437692847, guid: 38c64d92e32431443babbcf1d091113f,
+  m_AttachTransform: {fileID: 7547355137601258275, guid: 54ba44d4ecd83324991be29cf49b127d,
     type: 3}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -14643,7 +14643,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_InteractionLayers:
     m_Bits: 4294967295
-  m_AttachTransform: {fileID: 6845965468437692847, guid: 38c64d92e32431443babbcf1d091113f,
+  m_AttachTransform: {fileID: 7547355137601258275, guid: 54ba44d4ecd83324991be29cf49b127d,
     type: 3}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -15226,7 +15226,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_InteractionLayers:
     m_Bits: 4294967295
-  m_AttachTransform: {fileID: 6845965468437692847, guid: 38c64d92e32431443babbcf1d091113f,
+  m_AttachTransform: {fileID: 7547355137601258275, guid: 54ba44d4ecd83324991be29cf49b127d,
     type: 3}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
