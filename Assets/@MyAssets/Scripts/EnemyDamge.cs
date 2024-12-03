@@ -6,8 +6,8 @@ public class EnemyDamge : MonoBehaviour
 {
     public EnemyInteligent enemy;
 
-    public void Damage(GameObject objetivo)
+    public void Damage()
     {
-        enemy.Hit(objetivo);
+        enemy.Hit();
     }
 }

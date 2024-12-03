@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,7 @@ public class EnemyInteligent : MonoBehaviour
     public NavMeshAgent IA;
     public Animator anim;
     public GameObject portonObject;
+    public XROrigin jugador;
     public Porton porton;
     public float rangoDeteccion = 80f;
     public float anguloDeteccion = 60f;
@@ -112,17 +114,18 @@ public class EnemyInteligent : MonoBehaviour
     }
 
 
-    public void Hit(GameObject objetivo)
+    public void Hit()
     {
-        if (objetivo.CompareTag("Player"))
+        if (jugador.CompareTag("Player"))
         {
-            BarraVida barraVidaJugador = objetivo.GetComponent<BarraVida>();
+            BarraVida barraVidaJugador = jugador.GetComponent<BarraVida>();
             if (barraVidaJugador != null)
             {
+                Debug.Log("Daño");
                 barraVidaJugador.RecibirDanio(10);
             }
         }
-        else if (porton != null && objetivo.CompareTag("Porton"))
+        else if (porton != null)
         {
             porton.RecibirDanio(20);
         }
@@ -220,7 +223,7 @@ public class EnemyInteligent : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Hit(collision.gameObject);
+            Hit();
         }
     }
 }

@@ -22,7 +22,9 @@ public class BarraVida : MonoBehaviour
 
     public void RecibirDanio(float cantidad)
     {
+        Debug.Log(vidaActual);
         vidaActual -= cantidad;
+        Debug.Log(vidaActual);
         if (vidaActual < 0)
         {
             vidaActual = 0;
