@@ -9,10 +9,14 @@ public class BarraVida : MonoBehaviour
     public float vidadMax;
 
     private float vidaActual;
+    private float vidadMaxActual;
+    private string vidadMaxMedia = "media";
+    private string vidadMaxAlta = "alta";
 
     void Start()
     {
         vidaActual = vidadMax;
+        vidadMaxActual = vidadMax;
         //barraVida.GetComponent<Image>().color = new Color(70, 210, 50);
     }
 
@@ -47,6 +51,25 @@ public class BarraVida : MonoBehaviour
             vidaActual = 0;
             Morir();
         }
+    }
+
+    public void curar()
+    {
+        vidaActual = vidadMax;
+    }
+
+    public void actualizarVidaMax(string vida)
+    {
+        if (vida == vidadMaxMedia)
+        {
+            vidadMax = vidadMax + 50;
+        }
+        else if (vida == vidadMaxAlta)
+        {
+            vidadMax = vidadMax + 100;
+        }
+        vidaActual = vidadMax;
+        Debug.Log(vidaActual);
     }
 
     void Morir()
