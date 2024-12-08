@@ -1784,6 +1784,17 @@
                     "action": "InteractorSwitcher",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3cfdc67-53d9-40b5-9c76-a1ef7d69e8db",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Generic XR Controller;Continuous Move;Noncontinuous Move",
+                    "action": "Activate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
