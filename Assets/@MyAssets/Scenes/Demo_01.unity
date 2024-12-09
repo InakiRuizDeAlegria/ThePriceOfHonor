@@ -2719,6 +2719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 147515183}
   - component: {fileID: 147515184}
+  - component: {fileID: 147515185}
   m_Layer: 0
   m_Name: THE WHOLE CITY
   m_TagString: Untagged
@@ -2735,7 +2736,7 @@ Transform:
   m_GameObject: {fileID: 147515182}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.3, y: 0, z: 128}
+  m_LocalPosition: {x: -51.3, y: 0, z: 171}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2765,15 +2766,51 @@ MonoBehaviour:
   - nombreZona: interior1
     puntosSpawn:
     - {fileID: 22438561}
+  - nombreZona: interior2
+    puntosSpawn:
     - {fileID: 86840097}
+  - nombreZona: interior3
+    puntosSpawn:
     - {fileID: 2092835925}
   zonasInteriores: []
   configuracionesEnemigos:
-  - prefabEnemigo: {fileID: 1870497726}
+  - prefabEnemigo: {fileID: 3049913078511167710, guid: 1c01d8b1408bf1b499dbb2ac5c055410,
+      type: 3}
     esInterior: 0
-    cantidadInicial: 5
+    cantidadInicial: 1
     probabilidad: 1
   tiempoEntreOleadas: 5
+--- !u!114 &147515185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147515182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &148198397
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,6 +5153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 259597858}
+  - component: {fileID: 259597859}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -5234,6 +5272,37 @@ Transform:
   - {fileID: 221679227}
   m_Father: {fileID: 147515183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &259597859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259597857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 88f378dedb0a0654581032a914f77e20, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &261876706
 GameObject:
   m_ObjectHideFlags: 0
@@ -28438,7 +28507,7 @@ Transform:
   m_GameObject: {fileID: 1338775301}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.7, y: 1.1121802, z: -191.8}
+  m_LocalPosition: {x: 13.7, y: 1.1121802, z: -146}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41866,12 +41935,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4413732004591012, guid: 82761a2a0ace1264a8c5277d6ddf97fe,
     type: 3}
   m_PrefabInstance: {fileID: 1866397128}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1870497726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1405340787805333767, guid: 3a4041754686f854b8facb84e85a2195,
-    type: 3}
-  m_PrefabInstance: {fileID: 1761083176}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1872648574
 PrefabInstance:
