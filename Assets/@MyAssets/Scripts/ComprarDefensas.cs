@@ -63,7 +63,7 @@ public class ComprarDefensas : MonoBehaviour
         {
             gestorMenu.dineroTotal -= precio;
 
-            if (opcionSeleccionada == "porton")
+            if (opcionSeleccionada == "portonText")
                 porton.Reparar(100);
             else if (opcionSeleccionada == "barricada")
                 barricadaPrefab.SetActive(true);

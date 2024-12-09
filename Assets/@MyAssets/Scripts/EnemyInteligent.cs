@@ -21,6 +21,7 @@ public class EnemyInteligent : MonoBehaviour
     private bool haSidoVisto = false;
     private bool escondido = false;
     private Transform esconditeActual;
+    private GameObject objetivoActual;
 
     void Start()
     {
@@ -31,28 +32,10 @@ public class EnemyInteligent : MonoBehaviour
     {
         if (CompareTag("medico"))
         {
-            DetectarJugador();
-                GestionarMedico();
-            if (!escondido)
-            {
-                IA.speed = velocidadMedico;
-            }
-            else if (escondido)
-            {
-                IA.speed = Velocity;
-            }
-            else if (haSidoVisto)
-            {
-                IA.speed = Velocity;
-            }
-            else if (!haSidoVisto)
-            {
-                IA.speed = velocidadMedico;
-            }
-            else
-            {
-                IA.speed = Velocity;
-            }
+             DetectarJugador();
+             GestionarMedico();
+
+             IA.speed = escondido || haSidoVisto ? Velocity : velocidadMedico;
         }
         else if (CompareTag("aldeano"))
         {
@@ -66,20 +49,15 @@ public class EnemyInteligent : MonoBehaviour
         if (porton != null && porton.EstaActivo())
         {
             IA.SetDestination(portonObject.transform.position);
+            objetivoActual = portonObject;
         }
         else
         {
             IA.SetDestination(target.position);
+            objetivoActual = target.gameObject;
         }
 
-        if (IA.velocity == Vector3.zero)
-        {
-            anim.SetBool("estaAtacando", true);
-        }
-        else
-        {
-            anim.SetBool("estaAtacando", false);
-        }
+        anim.SetBool("estaAtacando", IA.velocity == Vector3.zero);
     }
 
     void GestionarMedico()
@@ -88,6 +66,7 @@ public class EnemyInteligent : MonoBehaviour
         {
             anim.SetBool("aSidoVisto", false);
             IA.SetDestination(target.position);
+            objetivoActual = target.gameObject;
         }
         else
         {
@@ -96,6 +75,8 @@ public class EnemyInteligent : MonoBehaviour
             {
                 IA.SetDestination(Camera.main.transform.position);
                 anim.SetBool("aSidoVisto", true);
+                escondido = false;
+                objetivoActual = Camera.main.gameObject;
             }
             else
             {
@@ -103,31 +84,30 @@ public class EnemyInteligent : MonoBehaviour
             }
         }
 
-        if (IA.velocity == Vector3.zero)
-        {
-            anim.SetBool("estaAtacando", true);
-        }
-        else
-        {
-            anim.SetBool("estaAtacando", false);
-        }
+        anim.SetBool("estaAtacando", IA.velocity == Vector3.zero);
     }
 
 
     public void Hit()
     {
-        jugador = FindObjectOfType<XROrigin>();
-        if (jugador != null && jugador.CompareTag("Player"))
+        if (objetivoActual != null)
         {
-            BarraVida barraVidaJugador = jugador.GetComponent<BarraVida>();
-            if (barraVidaJugador != null)
+            if (objetivoActual.CompareTag("Player"))
             {
-                barraVidaJugador.RecibirDanio(10);
+                BarraVida barraVidaJugador = objetivoActual.GetComponent<BarraVida>();
+                if (barraVidaJugador != null)
+                {
+                    barraVidaJugador.RecibirDanio(10);
+                }
             }
-        }
-        else if (porton != null)
-        {
-            porton.RecibirDanio(20);
+            else if (objetivoActual.CompareTag("Porton"))
+            {
+                Porton portonComponent = objetivoActual.GetComponent<Porton>();
+                if (portonComponent != null)
+                {
+                    portonComponent.RecibirDanio(20);
+                }
+            }
         }
     }
 

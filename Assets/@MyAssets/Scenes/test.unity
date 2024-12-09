@@ -2162,7 +2162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &216630366
 Transform:
   m_ObjectHideFlags: 0
@@ -9099,7 +9099,7 @@ MonoBehaviour:
   - prefabEnemigo: {fileID: 7209706907060018508, guid: 758fef3987f9ced4bb668e87cd489234,
       type: 3}
     esInterior: 0
-    cantidadInicial: 0
+    cantidadInicial: 1
     probabilidad: 1
   - prefabEnemigo: {fileID: 3049913078511167710, guid: 1c01d8b1408bf1b499dbb2ac5c055410,
       type: 3}
@@ -15957,6 +15957,7 @@ GameObject:
   - component: {fileID: 2002867790}
   - component: {fileID: 2002867789}
   - component: {fileID: 2002867788}
+  - component: {fileID: 2002867793}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Player
@@ -16053,6 +16054,20 @@ Transform:
   - {fileID: 569112615}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002867793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002867787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 766875ea40204564f912c747e152e590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barraVida: {fileID: 180154180}
+  vidadMax: 100
 --- !u!1 &2008781049
 GameObject:
   m_ObjectHideFlags: 0
@@ -17507,7 +17522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a3e7811e6a6047aef56b5bc092c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vidaMaxima: 100
+  vidaMaxima: 20
 --- !u!33 &3638246316463002591
 MeshFilter:
   m_ObjectHideFlags: 0

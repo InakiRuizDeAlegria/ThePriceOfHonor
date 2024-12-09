@@ -31,15 +31,27 @@ public class Porton : MonoBehaviour
     public void Reparar(int cantidad)
     {
         vidaActual += cantidad;
+
         if (vidaActual > vidaMaxima)
         {
             vidaActual = vidaMaxima;
+        }
+        Debug.Log(vidaActual);
+        if (vidaActual > 0)
+        {
+            Debug.Log("reactivado");
+            ReactivarPorton();
         }
     }
 
     private void DesactivarPorton()
     {
         gameObject.SetActive(false);
+    }
+
+    private void ReactivarPorton()
+    {
+        gameObject.SetActive(true);
     }
 
     public int ObtenerVidaActual()
