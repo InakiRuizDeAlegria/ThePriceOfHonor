@@ -53,8 +53,8 @@ public class EnemyInteligent : MonoBehaviour
         }
         else
         {
-            IA.SetDestination(target.position);
-            objetivoActual = target.gameObject;
+            IA.SetDestination(Camera.main.transform.position);
+            objetivoActual = Camera.main.gameObject;
         }
 
         anim.SetBool("estaAtacando", IA.velocity == Vector3.zero);
@@ -65,7 +65,7 @@ public class EnemyInteligent : MonoBehaviour
         if (!haSidoVisto)
         {
             anim.SetBool("aSidoVisto", false);
-            IA.SetDestination(target.position);
+            IA.SetDestination(Camera.main.transform.position);
             objetivoActual = target.gameObject;
         }
         else
