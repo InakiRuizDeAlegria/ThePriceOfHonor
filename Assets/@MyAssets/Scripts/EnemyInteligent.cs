@@ -26,6 +26,15 @@ public class EnemyInteligent : MonoBehaviour
     void Start()
     {
         porton = Porton.instancia;
+        if (jugador == null)
+        {
+            GameObject xrOriginObject = GameObject.FindObjectOfType<XROrigin>()?.gameObject;
+            if (xrOriginObject != null)
+            {
+                jugador = xrOriginObject.GetComponent<XROrigin>();
+                target = jugador.transform;
+            }
+        }
     }
 
     void Update()
@@ -53,8 +62,8 @@ public class EnemyInteligent : MonoBehaviour
         }
         else
         {
-            IA.SetDestination(Camera.main.transform.position);
-            objetivoActual = Camera.main.gameObject;
+            IA.SetDestination(target.position);
+            objetivoActual = target.gameObject;
         }
 
         anim.SetBool("estaAtacando", IA.velocity == Vector3.zero);
@@ -65,7 +74,7 @@ public class EnemyInteligent : MonoBehaviour
         if (!haSidoVisto)
         {
             anim.SetBool("aSidoVisto", false);
-            IA.SetDestination(Camera.main.transform.position);
+            IA.SetDestination(target.position);
             objetivoActual = target.gameObject;
         }
         else
@@ -73,10 +82,10 @@ public class EnemyInteligent : MonoBehaviour
             Vector3 direccionAlJugador = transform.position - Camera.main.transform.position;
             if (direccionAlJugador.magnitude <= 5f)
             {
-                IA.SetDestination(Camera.main.transform.position);
+                IA.SetDestination(target.position);
                 anim.SetBool("aSidoVisto", true);
                 escondido = false;
-                objetivoActual = Camera.main.gameObject;
+                objetivoActual = target.gameObject;
             }
             else
             {
@@ -90,6 +99,7 @@ public class EnemyInteligent : MonoBehaviour
 
     public void Hit()
     {
+        Debug.Log(objetivoActual);
         if (objetivoActual != null)
         {
             if (objetivoActual.CompareTag("Player"))
@@ -131,7 +141,7 @@ public class EnemyInteligent : MonoBehaviour
 
                     if (direccionAlMedico.magnitude <= 5f)
                     {
-                        IA.SetDestination(Camera.main.transform.position);
+                        IA.SetDestination(target.position);
                         anim.SetBool("aSidoVisto", true);
                         escondido = false;
                     }
@@ -196,14 +206,6 @@ public class EnemyInteligent : MonoBehaviour
         {
             haSidoVisto = false;
             escondido = false;
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Hit();
         }
     }
 }
