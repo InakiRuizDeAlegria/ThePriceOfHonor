@@ -18311,7 +18311,7 @@ MonoBehaviour:
   barraVida: {fileID: 4362731878021504568}
   vidaMax: 100
   ventanaMuerte: {fileID: 1315492121}
-  VRCamera: {fileID: 5054180883335120365}
+  vrCamera: {fileID: 8151109857786517022}
 --- !u!224 &5636063738552612891
 RectTransform:
   m_ObjectHideFlags: 0

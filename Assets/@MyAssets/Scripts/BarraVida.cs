@@ -9,18 +9,18 @@ public class BarraVida : MonoBehaviour
     public float vidaMax;
 
     private float vidaActual;
-    private float vidaMaxActual;
+    private float vidadMaxActual;
     private string vidadMaxMedia = "media";
     private string vidadMaxAlta = "alta";
 
     [Header("Ventana de Muerte")]
     public GameObject ventanaMuerte;
-    public Transform VRCamera;
+    public Transform vrCamera;
 
     void Start()
     {
         vidaActual = vidaMax;
-        vidaMaxActual = vidaMax;
+        vidadMaxActual = vidaMax;
 
         if (ventanaMuerte != null)
             ventanaMuerte.SetActive(false);
@@ -58,22 +58,34 @@ public class BarraVida : MonoBehaviour
             vidaMax += 100;
         }
         vidaActual = vidaMax;
-        Debug.Log(vidaActual);
     }
 
     void Morir()
     {
         MostrarVentanaMuerte();
+        DetenerJuego();
     }
 
     void MostrarVentanaMuerte()
     {
-        if (ventanaMuerte != null && VRCamera != null)
+        if (ventanaMuerte != null && vrCamera != null)
         {
             ventanaMuerte.SetActive(true);
 
-            ventanaMuerte.transform.position = VRCamera.position + VRCamera.forward * 2.0f;
-            ventanaMuerte.transform.rotation = Quaternion.LookRotation(VRCamera.forward);
+            Vector3 posicionFrente = vrCamera.position + vrCamera.forward * 2.0f;
+            ventanaMuerte.transform.position = posicionFrente;
+
+            ventanaMuerte.transform.rotation = Quaternion.LookRotation(vrCamera.forward);
         }
+    }
+
+    void DetenerJuego()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ReanudarJuego()
+    {
+        Time.timeScale = 1f;
     }
 }
