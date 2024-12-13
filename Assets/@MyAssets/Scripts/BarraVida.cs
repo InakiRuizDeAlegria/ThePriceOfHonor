@@ -6,47 +6,36 @@ using UnityEngine.UI;
 public class BarraVida : MonoBehaviour
 {
     public Image barraVida;
-    public float vidadMax;
+    public float vidaMax;
 
     private float vidaActual;
-    private float vidadMaxActual;
+    private float vidaMaxActual;
     private string vidadMaxMedia = "media";
     private string vidadMaxAlta = "alta";
 
+    [Header("Ventana de Muerte")]
+    public GameObject ventanaMuerte;
+    public Transform VRCamera;
+
     void Start()
     {
-        vidaActual = vidadMax;
-        vidadMaxActual = vidadMax;
-        //barraVida.GetComponent<Image>().color = new Color(70, 210, 50);
+        vidaActual = vidaMax;
+        vidaMaxActual = vidaMax;
+
+        if (ventanaMuerte != null)
+            ventanaMuerte.SetActive(false);
     }
 
     void Update()
     {
-        barraVida.fillAmount = vidaActual / vidadMax;
-        //cambiarColor();
+        barraVida.fillAmount = vidaActual / vidaMax;
     }
-
-    /*private void cambiarColor()
-    {
-        if (vidaActual >= 60)
-        {
-            barraVida.GetComponent<Image>().color = new Color(70, 210, 50);
-        }
-        else if (vidaActual <= 30)
-        {
-            barraVida.GetComponent<Image>().color = new Color(210, 40, 50);
-        }
-        else
-        {
-            barraVida.GetComponent<Image>().color = new Color(220, 120, 30);
-        }
-    }*/
 
     public void RecibirDanio(float cantidad)
     {
         vidaActual -= cantidad;
 
-        if (vidaActual < 0)
+        if (vidaActual <= 0)
         {
             vidaActual = 0;
             Morir();
@@ -55,25 +44,36 @@ public class BarraVida : MonoBehaviour
 
     public void curar()
     {
-        vidaActual = vidadMax;
+        vidaActual = vidaMax;
     }
 
     public void actualizarVidaMax(string vida)
     {
         if (vida == vidadMaxMedia)
         {
-            vidadMax = vidadMax + 50;
+            vidaMax += 50;
         }
         else if (vida == vidadMaxAlta)
         {
-            vidadMax = vidadMax + 100;
+            vidaMax += 100;
         }
-        vidaActual = vidadMax;
+        vidaActual = vidaMax;
         Debug.Log(vidaActual);
     }
 
     void Morir()
     {
-        Debug.Log("El jugador ha muerto");
+        MostrarVentanaMuerte();
+    }
+
+    void MostrarVentanaMuerte()
+    {
+        if (ventanaMuerte != null && VRCamera != null)
+        {
+            ventanaMuerte.SetActive(true);
+
+            ventanaMuerte.transform.position = VRCamera.position + VRCamera.forward * 2.0f;
+            ventanaMuerte.transform.rotation = Quaternion.LookRotation(VRCamera.forward);
+        }
     }
 }
