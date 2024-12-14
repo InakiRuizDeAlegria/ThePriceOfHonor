@@ -31,6 +31,17 @@ public class BarraVida : MonoBehaviour
         barraVida.fillAmount = vidaActual / vidaMax;
     }
 
+    void LateUpdate()
+{
+    if (ventanaMuerte.activeSelf && vrCamera != null)
+    {
+        Vector3 posicionFrente = vrCamera.position + vrCamera.forward * 2.0f; // Ajusta la distancia si es necesario
+        ventanaMuerte.transform.position = posicionFrente;
+
+        ventanaMuerte.transform.rotation = Quaternion.LookRotation(vrCamera.forward);
+    }
+}
+
     public void RecibirDanio(float cantidad)
     {
         vidaActual -= cantidad;
