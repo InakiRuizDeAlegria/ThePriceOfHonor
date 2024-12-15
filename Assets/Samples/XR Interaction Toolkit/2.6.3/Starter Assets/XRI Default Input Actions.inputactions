@@ -1599,9 +1599,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "InteractorSwitcher",
+                    "name": "Switcher",
                     "type": "Button",
-                    "id": "56002d28-ff0d-4a72-af71-0a512230aaf4",
+                    "id": "19fcc511-5be9-4649-9391-3096e739253b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1776,23 +1776,23 @@
                 },
                 {
                     "name": "",
-                    "id": "703955c5-fbe6-4c13-aeb9-c85c97e32adb",
-                    "path": "<XRController>{RightHand}/secondaryButton",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "Generic XR Controller;Continuous Move;Noncontinuous Move",
-                    "action": "InteractorSwitcher",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f3cfdc67-53d9-40b5-9c76-a1ef7d69e8db",
                     "path": "<XRController>{RightHand}/secondaryButton",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Generic XR Controller;Continuous Move;Noncontinuous Move",
                     "action": "Activate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52f2b380-80a3-480b-a726-44092914be58",
+                    "path": "<XRController>{RightHand}/secondaryButton ",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switcher",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

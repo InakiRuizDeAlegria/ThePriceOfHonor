@@ -4,36 +4,20 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class InteractorSwitcher : MonoBehaviour
 {
-    public GameObject directInteractorObject;
-    public GameObject rayInteractorObject;
-
-    private XRDirectInteractor directInteractor;
-    private XRRayInteractor rayInteractor;
-
+    public GameObject grabInteractor;
+    public GameObject rayInteractor;
     public InputActionReference switchInteractorAction;
+
+    private bool isDirectInteractorActive = true;
 
     private void Awake()
     {
-        if (directInteractorObject != null)
+        if (grabInteractor == null || rayInteractor == null)
         {
-            directInteractor = directInteractorObject.GetComponent<XRDirectInteractor>();
+            return;
         }
 
-        if (rayInteractorObject != null)
-        {
-            rayInteractor = rayInteractorObject.GetComponent<XRRayInteractor>();
-        }
-
-        if (directInteractor != null)
-        {
-            directInteractor.enabled = true;
-        }
-
-        if (rayInteractor != null)
-        {
-            rayInteractor.enabled = false;
-        }
-
+        SetInteractorState(true);
 
         if (switchInteractorAction != null)
         {
@@ -43,6 +27,7 @@ public class InteractorSwitcher : MonoBehaviour
 
     private void OnDestroy()
     {
+
         if (switchInteractorAction != null)
         {
             switchInteractorAction.action.performed -= OnSwitchInteractor;
@@ -56,18 +41,13 @@ public class InteractorSwitcher : MonoBehaviour
 
     private void SwitchInteractor()
     {
-        if (directInteractor != null && rayInteractor != null)
-        {
-            if (directInteractor.enabled)
-            {
-                directInteractor.enabled = false;
-                rayInteractor.enabled = true;
-            }
-            else
-            {
-                directInteractor.enabled = true;
-                rayInteractor.enabled = false;
-            }
-        }
+        isDirectInteractorActive = !isDirectInteractorActive;
+        SetInteractorState(isDirectInteractorActive);
+    }
+
+    private void SetInteractorState(bool activateDirectInteractor)
+    {
+        grabInteractor.SetActive(activateDirectInteractor);
+        rayInteractor.SetActive(!activateDirectInteractor);
     }
 }

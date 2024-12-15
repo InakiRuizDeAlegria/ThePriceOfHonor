@@ -13233,9 +13233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38aeae1f3549c934795f9c0f7499e555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directInteractorObject: {fileID: 0}
-  rayInteractorObject: {fileID: 0}
-  switchInteractorAction: {fileID: -8989920156839282338, guid: c348712bda248c246b8c49b3db54643f,
+  grabInteractor: {fileID: 5530606444609196634}
+  rayInteractor: {fileID: 1521737959}
+  switchInteractorAction: {fileID: 8296449504125773318, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!4 &1694303844
 Transform:
