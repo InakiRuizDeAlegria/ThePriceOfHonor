@@ -9,6 +9,7 @@ TagManager:
   - medico
   - Refugio
   - Espada
+  - arrow
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - Espada
   - navegable
   - Obstacles
-  - 
-  - 
+  - bow
+  - arrow
   - 
   - 
   - 
