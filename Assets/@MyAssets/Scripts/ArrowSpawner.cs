@@ -7,42 +7,46 @@ public class ArrowSpawner : MonoBehaviour
 {
     public GameObject arrow;
     public GameObject notch;
-    public XRSocketInteractor arrowSocket; // Referencia al socket del arco
 
     private XRGrabInteractable bow;
+    private bool arrowNotched = false;
     private GameObject currentArrow = null;
-
+    
     void Start()
     {
         bow = GetComponent<XRGrabInteractable>();
-
-        // Subscribir a los eventos del socket
-        arrowSocket.selectEntered.AddListener(OnArrowPlaced);
-        arrowSocket.selectExited.AddListener(OnArrowRemoved);
+        PullInteraction.PullActionReleased += NotchEmpty;
     }
 
     private void OnDestroy()
     {
-        // Desubscribir de los eventos del socket
-        arrowSocket.selectEntered.RemoveListener(OnArrowPlaced);
-        arrowSocket.selectExited.RemoveListener(OnArrowRemoved);
+        PullInteraction.PullActionReleased -= NotchEmpty;
     }
 
-    private void OnArrowPlaced(SelectEnterEventArgs args)
+    void Update()
     {
-        if (currentArrow == null)
+        if (bow.isSelected && arrowNotched == false)
         {
-            // Destruir la flecha colocada en el socket
-            Destroy(args.interactableObject.transform.gameObject);
-
-            // Instanciar una flecha nueva en el notch
-            currentArrow = Instantiate(arrow, notch.transform);
+            arrowNotched = true;
+            StartCoroutine("DelayedSpawn");
+        }
+        if (!bow.isSelected && currentArrow != null)
+        {
+            Destroy(currentArrow);
+            NotchEmpty(1f);
         }
     }
 
-    private void OnArrowRemoved(SelectExitEventArgs args)
+    private void NotchEmpty(float value)
     {
-        // Limpiar la referencia a la flecha actual si se retira del notch
+        arrowNotched = false;
         currentArrow = null;
     }
+
+    IEnumerator DelayedSpawn()
+    {
+        yield return new WaitForSeconds(1f);
+        currentArrow = Instantiate(arrow, notch.transform);
+    }
+
 }
