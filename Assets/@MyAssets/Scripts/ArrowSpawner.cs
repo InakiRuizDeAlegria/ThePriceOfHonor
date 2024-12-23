@@ -7,11 +7,11 @@ public class ArrowSpawner : MonoBehaviour
 {
     public GameObject arrow;
     public GameObject notch;
-
+    public Quiver quiver;
     private XRGrabInteractable bow;
     private bool arrowNotched = false;
     private GameObject currentArrow = null;
-    
+
     void Start()
     {
         bow = GetComponent<XRGrabInteractable>();
@@ -25,11 +25,12 @@ public class ArrowSpawner : MonoBehaviour
 
     void Update()
     {
-        if (bow.isSelected && arrowNotched == false)
+        if (bow.isSelected && !arrowNotched && quiver.UseArrow())
         {
             arrowNotched = true;
             StartCoroutine("DelayedSpawn");
         }
+
         if (!bow.isSelected && currentArrow != null)
         {
             Destroy(currentArrow);
@@ -46,7 +47,14 @@ public class ArrowSpawner : MonoBehaviour
     IEnumerator DelayedSpawn()
     {
         yield return new WaitForSeconds(1f);
+    
         currentArrow = Instantiate(arrow, notch.transform);
+    
+        ResetPosition resetPosition = currentArrow.GetComponent<ResetPosition>();
+        if (resetPosition != null)
+        {
+            Destroy(resetPosition);
+        }
     }
 
 }

@@ -9,6 +9,7 @@ TagManager:
   - medico
   - Refugio
   - Espada
+  - Arrow
   layers:
   - Default
   - TransparentFX
