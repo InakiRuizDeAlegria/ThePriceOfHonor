@@ -18,8 +18,8 @@ public class Quiver : MonoBehaviour
     {
         if (other.CompareTag("Arrow"))
         {
-            arrowCount++;
-            UpdateArrowCountUI();
+            Debug.Log("he recogido una flecha");
+            AddArrow();
             Destroy(other.gameObject);
         }
     }
@@ -42,4 +42,11 @@ public class Quiver : MonoBehaviour
         }
         return false;   
     }
+
+    public void AddArrow()
+    {
+        arrowCount++;
+        UpdateArrowCountUI();
+    }
+
 }

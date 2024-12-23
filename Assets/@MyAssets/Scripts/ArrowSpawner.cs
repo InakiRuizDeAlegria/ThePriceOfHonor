@@ -15,6 +15,14 @@ public class ArrowSpawner : MonoBehaviour
     void Start()
     {
         bow = GetComponent<XRGrabInteractable>();
+
+        quiver = FindObjectOfType<Quiver>();
+        GameObject arrowObject = GameObject.FindGameObjectWithTag("flechaFuncional");
+        if (arrowObject != null)
+        {
+            arrow = arrowObject;
+        }
+
         PullInteraction.PullActionReleased += NotchEmpty;
     }
 
@@ -34,6 +42,7 @@ public class ArrowSpawner : MonoBehaviour
         if (!bow.isSelected && currentArrow != null)
         {
             Destroy(currentArrow);
+            quiver.AddArrow();
             NotchEmpty(1f);
         }
     }
@@ -49,6 +58,8 @@ public class ArrowSpawner : MonoBehaviour
         yield return new WaitForSeconds(1f);
     
         currentArrow = Instantiate(arrow, notch.transform);
+        currentArrow.transform.localPosition = Vector3.zero;
+        currentArrow.transform.localRotation = Quaternion.Euler(0, 0, 90);
     
         ResetPosition resetPosition = currentArrow.GetComponent<ResetPosition>();
         if (resetPosition != null)
