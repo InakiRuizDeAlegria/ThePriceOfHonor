@@ -22,9 +22,9 @@ TagManager:
   - Espada
   - navegable
   - Obstacles
-  - 
-  - 
-  - 
+  - LeftHandPhisics
+  - RightHandPhisics
+  - NonPhisicsHand
   - 
   - 
   - 

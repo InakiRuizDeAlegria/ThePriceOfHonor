@@ -60,12 +60,6 @@ public class ArrowSpawner : MonoBehaviour
         currentArrow = Instantiate(arrow, notch.transform);
         currentArrow.transform.localPosition = Vector3.zero;
         currentArrow.transform.localRotation = Quaternion.Euler(0, 0, 90);
-    
-        ResetPosition resetPosition = currentArrow.GetComponent<ResetPosition>();
-        if (resetPosition != null)
-        {
-            Destroy(resetPosition);
-        }
     }
 
 }
