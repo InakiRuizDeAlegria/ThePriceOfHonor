@@ -17,7 +17,8 @@ public class SistemaOleadas : MonoBehaviour
         public GameObject prefabEnemigo;
         public bool esInterior;
         public int cantidadInicial;
-        public float probabilidad; // Para determinar la frecuencia de aparición
+        public float probabilidad;
+        public int nivelRequerido; // Nivel en el que este enemigo comienza a aparecer
     }
 
     public List<Zona> zonasExteriores;
@@ -25,10 +26,17 @@ public class SistemaOleadas : MonoBehaviour
     public List<ConfiguracionEnemigo> configuracionesEnemigos;
 
     public float tiempoEntreOleadas = 5f;
+    public int dineroPorOleada = 100;
 
     private int oleadaActual = 0;
+    private int nivelActual = 1;
     private int enemigosRestantes = 0;
     private bool estaIniciandoOleada = false;
+
+    public MenuManagerTexto tienda;
+
+    public AudioSource audioSource;
+    public AudioClip audioInicioOleada;
 
     void Start()
     {
@@ -47,16 +55,22 @@ public class SistemaOleadas : MonoBehaviour
     void IniciarOleada()
     {
         oleadaActual++;
+        if (oleadaActual % 5 == 1 && oleadaActual > 1)
+        {
+            nivelActual++;
+        }
+
         estaIniciandoOleada = false;
 
-        Debug.Log($"Iniciando oleada {oleadaActual}.");
+        ReproducirAudioInicioOleada();
 
-        // Generar enemigos basados en configuraciones
         foreach (var configuracion in configuracionesEnemigos)
         {
+            if (configuracion.nivelRequerido > nivelActual)
+                continue;
+
             int cantidadDeEnemigos = configuracion.cantidadInicial + oleadaActual - 1;
 
-            // Elegir la zona correspondiente (interior o exterior)
             Zona zonaSeleccionada = SeleccionarZona(configuracion.esInterior);
 
             if (zonaSeleccionada != null)
@@ -64,6 +78,17 @@ public class SistemaOleadas : MonoBehaviour
                 GenerarEnemigosEnZona(configuracion.prefabEnemigo, zonaSeleccionada, cantidadDeEnemigos, configuracion.probabilidad);
                 enemigosRestantes += cantidadDeEnemigos;
             }
+        }
+
+        int dineroGanado = dineroPorOleada * oleadaActual;
+        tienda.dineroTotal += dineroGanado;
+    }
+
+    void ReproducirAudioInicioOleada()
+    {
+        if (audioSource != null && audioInicioOleada != null)
+        {
+            audioSource.PlayOneShot(audioInicioOleada);
         }
     }
 
@@ -75,7 +100,6 @@ public class SistemaOleadas : MonoBehaviour
 
         if (zonasDisponibles.Count == 0)
         {
-            Debug.LogError("No hay zonas disponibles para generar enemigos.");
             return null;
         }
 

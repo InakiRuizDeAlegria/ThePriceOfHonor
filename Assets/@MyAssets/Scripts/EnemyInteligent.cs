@@ -23,6 +23,9 @@ public class EnemyInteligent : MonoBehaviour
     private Transform esconditeActual;
     private GameObject objetivoActual;
 
+    public AudioSource audioSource;
+    public AudioClip sonidoGolpe;
+
     void Start()
     {
         porton = Porton.instancia;
@@ -35,6 +38,13 @@ public class EnemyInteligent : MonoBehaviour
                 target = jugador.transform;
             }
         }
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.spatialBlend = 1f;
+        }
+
     }
 
     void Update()
@@ -99,7 +109,12 @@ public class EnemyInteligent : MonoBehaviour
 
     public void Hit()
     {
-        Debug.Log(objetivoActual);
+
+        if (audioSource != null && sonidoGolpe != null)
+        {
+            audioSource.PlayOneShot(sonidoGolpe);
+        }
+
         if (objetivoActual != null)
         {
             if (objetivoActual.CompareTag("Player"))
