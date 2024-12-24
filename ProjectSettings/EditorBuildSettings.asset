@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/@MyAssets/Scenes/1 Start Scene.unity
     guid: 47528c1ff5415644d97c5b35b87ec7b7
-  - enabled: 1
+  - enabled: 0
     path: Assets/@MyAssets/Scenes/test.unity
     guid: e0fb96f1286fe1740a041796e074e53e
+  - enabled: 1
+    path: Assets/@MyAssets/Scenes/Battlefield.unity
+    guid: b1c7af00435312049aba9dbc54a373a8
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: cfc6a60370ee68d4b8d9a9b5cbefc316,
       type: 2}
