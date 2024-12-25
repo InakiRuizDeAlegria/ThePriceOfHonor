@@ -961,10 +961,10 @@
                 {
                     "name": "",
                     "id": "f5526f50-38bf-47d7-b2a3-bf7a681c07e8",
-                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "path": "<XRController>{LeftHand}/menuButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Generic XR Controller",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1776,22 +1776,11 @@
                 },
                 {
                     "name": "",
-                    "id": "f3cfdc67-53d9-40b5-9c76-a1ef7d69e8db",
-                    "path": "<XRController>{RightHand}/secondaryButton",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "Generic XR Controller;Continuous Move;Noncontinuous Move",
-                    "action": "Activate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "52f2b380-80a3-480b-a726-44092914be58",
                     "path": "<XRController>{RightHand}/secondaryButton ",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Generic XR Controller",
                     "action": "Switcher",
                     "isComposite": false,
                     "isPartOfComposite": false

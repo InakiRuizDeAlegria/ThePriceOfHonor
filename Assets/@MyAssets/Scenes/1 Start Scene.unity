@@ -21047,7 +21047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_System: {fileID: 0}
-  m_TurnSpeed: 60
+  m_TurnSpeed: 100
   m_LeftHandTurnAction:
     m_UseReference: 0
     m_Action:
@@ -21088,6 +21088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snapTurn: {fileID: 3127728408035508704}
   continuousTurn: {fileID: 7873184977557373658}
+  turnTypeDropdown: {fileID: 189759100}
 --- !u!33 &7893345458200051002
 MeshFilter:
   m_ObjectHideFlags: 0
