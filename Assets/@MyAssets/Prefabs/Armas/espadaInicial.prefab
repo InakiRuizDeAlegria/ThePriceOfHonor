@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2649357551173626606}
   m_Layer: 7
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 4237431405141641111}
   m_Layer: 7
   m_Name: Hilt.
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 2084367652042138787}
   m_Layer: 7
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 724800614341846115}
   m_Layer: 7
   m_Name: Grip
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 2132514165195141918}
   m_Layer: 7
   m_Name: Crossguard
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 8982246454104898566}
   m_Layer: 7
   m_Name: AttachPoint
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 5963302453121277903}
   m_Layer: 7
   m_Name: Blade
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 697478307989890430}
   m_Layer: 7
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 8840808442025590207}
   m_Layer: 7
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 2826457161935073368}
   m_Layer: 7
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

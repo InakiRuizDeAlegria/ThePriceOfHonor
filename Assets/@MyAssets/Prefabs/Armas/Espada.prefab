@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4456253145781177171}
   m_Layer: 7
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 334201274801730541}
   m_Layer: 7
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 2217041614448679874}
   m_Layer: 7
   m_Name: Sword_01
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 3568478737220981178}
   m_Layer: 7
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 6770416864092096538}
   m_Layer: 7
   m_Name: startSlicePoint
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 3188355425682432722}
   m_Layer: 7
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 2681748360864338499}
   m_Layer: 7
   m_Name: AttachPoint
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 3127799661237371016}
   m_Layer: 7
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -660,7 +660,7 @@ GameObject:
   - component: {fileID: 8611877120216035054}
   m_Layer: 7
   m_Name: endSlicePoint
-  m_TagString: Untagged
+  m_TagString: Espada
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

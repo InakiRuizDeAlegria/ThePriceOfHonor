@@ -18,7 +18,6 @@ public class Quiver : MonoBehaviour
     {
         if (other.CompareTag("Arrow"))
         {
-            Debug.Log("he recogido una flecha");
             AddArrow();
             Destroy(other.gameObject);
         }
