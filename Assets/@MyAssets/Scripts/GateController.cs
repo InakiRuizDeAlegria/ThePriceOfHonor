@@ -24,7 +24,6 @@ public class GateController : MonoBehaviour
     private Vector3 closedPosition;
     private Vector3 openPosition;
     private bool isMoving = false;
-    private bool playerInside = true;
 
     void Start()
     {
@@ -96,25 +95,6 @@ public class GateController : MonoBehaviour
         if (gate != null)
         {
             gate.SetActive(false);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && other.gameObject.layer == LayerMask.NameToLayer("interiorDelMapa"))
-        {
-            Debug.Log("Dentro del mapa");
-            playerInside = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") && other.gameObject.layer == LayerMask.NameToLayer("interiorDelMapa"))
-        {
-            Debug.Log("Fuera del mapa");
-            playerInside = false;
-            OpenGate();
         }
     }
 
