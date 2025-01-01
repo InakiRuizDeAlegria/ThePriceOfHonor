@@ -67,55 +67,66 @@ public class EnemyInteligent : MonoBehaviour
         }
     }
 
-void GestionarAldeano()
-{
-    if (porton != null && porton.EstaActivo())
+    void GestionarAldeano()
     {
-        if (!enemigosAtacandoPorton.Contains(this) && enemigosAtacandoPorton.Count < 3)
+        if (porton != null && porton.EstaActivo())
         {
-            enemigosAtacandoPorton.Add(this);
-            estaEsperando = false;
-        }
-
-        if (enemigosAtacandoPorton.Contains(this) && enemigosAtacandoPorton.IndexOf(this) < 3)
-        {
-            IA.SetDestination(portonObject.transform.position);
-            objetivoActual = portonObject;
-            bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
-            anim.SetBool("estaAtacando", estaQuieto);
-            anim.SetBool("esperando", false);
-        }
-        else
-        {
-            if (!estaEsperando)
+            if (!enemigosAtacandoPorton.Contains(this) && enemigosAtacandoPorton.Count < 3)
             {
-                Vector3 direccionEspera = (transform.position - portonObject.transform.position).normalized;
-                Vector3 posicionEspera = portonObject.transform.position + direccionEspera * distanciaEspera;
-                IA.SetDestination(posicionEspera);
-                objetivoActual = null;
-                estaEsperando = true;
+                enemigosAtacandoPorton.Add(this);
+                estaEsperando = false;
             }
-            bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
-            if (estaQuieto)
+
+            if (enemigosAtacandoPorton.Contains(this) && enemigosAtacandoPorton.IndexOf(this) < 3)
             {
-                anim.SetBool("esperando", true);
+                IA.SetDestination(portonObject.transform.position);
+                objetivoActual = portonObject;
+
+                // Si está quieto, ataca
+                bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
+                anim.SetBool("estaAtacando", estaQuieto);
+                anim.SetBool("esperando", false);
             }
             else
             {
+                if (!estaEsperando)
+                {
+                    Vector3 direccionEspera = (transform.position - portonObject.transform.position).normalized;
+                    Vector3 posicionEspera = portonObject.transform.position + direccionEspera * distanciaEspera;
+                    IA.SetDestination(posicionEspera);
+                    objetivoActual = null;
+                    estaEsperando = true;
+                }
+
+                bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
+                anim.SetBool("esperando", estaQuieto);
+                anim.SetBool("estaAtacando", false);
+            }
+        }
+        else
+        {
+            IA.SetDestination(target.position);
+            objetivoActual = target.gameObject;
+
+            // Comprobar si el aldeano está cerca del jugador
+            float distanciaAlJugador = Vector3.Distance(transform.position, target.position);
+            bool estaCerca = distanciaAlJugador < 2f; // Ajusta la distancia según sea necesario
+
+            if (estaCerca)
+            {
+                // Si está cerca y quieto, activar la animación de atacar
+                bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
+                anim.SetBool("estaAtacando", estaQuieto);
                 anim.SetBool("esperando", false);
             }
-            anim.SetBool("estaAtacando", false);
+            else
+            {
+                // Si está lejos, asegurarse de que esté corriendo
+                anim.SetBool("estaAtacando", false);
+                anim.SetBool("esperando", false);
+            }
         }
     }
-    else
-    {
-        IA.SetDestination(target.position);
-        objetivoActual = target.gameObject;
-        anim.SetBool("estaAtacando", false);
-        anim.SetBool("esperando", false);
-    }
-}
-
 
     void GestionarMedico()
     {
