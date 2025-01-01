@@ -26,6 +26,10 @@ public class EnemyInteligent : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip sonidoGolpe;
 
+    private static List<EnemyInteligent> enemigosAtacandoPorton = new List<EnemyInteligent>();
+    public float distanciaEspera = 5f;
+    private bool estaEsperando = false;
+
     void Start()
     {
         porton = Porton.instancia;
@@ -63,21 +67,55 @@ public class EnemyInteligent : MonoBehaviour
         }
     }
 
-    void GestionarAldeano()
+void GestionarAldeano()
+{
+    if (porton != null && porton.EstaActivo())
     {
-        if (porton != null && porton.EstaActivo())
+        if (!enemigosAtacandoPorton.Contains(this) && enemigosAtacandoPorton.Count < 3)
+        {
+            enemigosAtacandoPorton.Add(this);
+            estaEsperando = false;
+        }
+
+        if (enemigosAtacandoPorton.Contains(this) && enemigosAtacandoPorton.IndexOf(this) < 3)
         {
             IA.SetDestination(portonObject.transform.position);
             objetivoActual = portonObject;
+            bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
+            anim.SetBool("estaAtacando", estaQuieto);
+            anim.SetBool("esperando", false);
         }
         else
         {
-            IA.SetDestination(target.position);
-            objetivoActual = target.gameObject;
+            if (!estaEsperando)
+            {
+                Vector3 direccionEspera = (transform.position - portonObject.transform.position).normalized;
+                Vector3 posicionEspera = portonObject.transform.position + direccionEspera * distanciaEspera;
+                IA.SetDestination(posicionEspera);
+                objetivoActual = null;
+                estaEsperando = true;
+            }
+            bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
+            if (estaQuieto)
+            {
+                anim.SetBool("esperando", true);
+            }
+            else
+            {
+                anim.SetBool("esperando", false);
+            }
+            anim.SetBool("estaAtacando", false);
         }
-
-        anim.SetBool("estaAtacando", IA.velocity == Vector3.zero);
     }
+    else
+    {
+        IA.SetDestination(target.position);
+        objetivoActual = target.gameObject;
+        anim.SetBool("estaAtacando", false);
+        anim.SetBool("esperando", false);
+    }
+}
+
 
     void GestionarMedico()
     {
@@ -223,6 +261,12 @@ public class EnemyInteligent : MonoBehaviour
             escondido = false;
         }
     }
+
+    private void OnDestroy()
+    {
+        enemigosAtacandoPorton.Remove(this);
+    }
+
 }
 
 

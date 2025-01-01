@@ -3610,6 +3610,37 @@ MonoBehaviour:
   m_UIHoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1453960888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1453960889}
+  m_Layer: 8
+  m_Name: posicionPorton
+  m_TagString: Porton
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1453960889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453960888}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3.57, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8079605027974032571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1465434172
 GameObject:
   m_ObjectHideFlags: 0
@@ -26160,8 +26191,8 @@ Transform:
   m_GameObject: {fileID: 3130754416713612150}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 116.7, y: 1, z: -311.77}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.59999996}
+  m_LocalPosition: {x: 120.47, y: 1, z: -311.77}
+  m_LocalScale: {x: 1.47, y: 0.59999996, z: 0.59999996}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3827969828440715276}
@@ -36330,8 +36361,8 @@ Transform:
   m_GameObject: {fileID: 1376442419385264122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 125.4, y: 1, z: -272.91}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.59999996}
+  m_LocalPosition: {x: 125.4, y: 1, z: -265.7}
+  m_LocalScale: {x: 2.24, y: 0.59999996, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3827969828440715276}
@@ -56967,8 +56998,8 @@ Transform:
   m_GameObject: {fileID: 106295344093982004}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.5, y: 1, z: -277.5}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.59999996}
+  m_LocalPosition: {x: 9.5, y: 1, z: -279.75}
+  m_LocalScale: {x: 1.25, y: 0.59999996, z: 1.62}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3827969828440715276}
@@ -61436,13 +61467,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8893295741647877633}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -3.6399841}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 3.63}
   m_LocalScale: {x: 0.91409844, y: 1, z: 0.6974926}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1453960889}
   m_Father: {fileID: 3575461494781572954}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!4 &8080693333290155924
 Transform:
   m_ObjectHideFlags: 0
@@ -67548,6 +67580,7 @@ GameObject:
   - component: {fileID: 6947832854676363220}
   - component: {fileID: 6984427206747516089}
   - component: {fileID: 9036391794373658635}
+  - component: {fileID: 9036391794373658636}
   m_Layer: 8
   m_Name: portonEntero
   m_TagString: Porton
@@ -67967,6 +68000,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1176993583026759311, guid: 0c9930dc902b37f4ea69bc8706cf4d9e, type: 3}
+--- !u!208 &9036391794373658636
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893295741647877633}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 4.361, y: 0.163, z: 6.682}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.001, y: -3.2410002, z: 6.622}
+  m_TimeToStationary: 0.5
 --- !u!1 &9037460022002297322
 GameObject:
   m_ObjectHideFlags: 0
