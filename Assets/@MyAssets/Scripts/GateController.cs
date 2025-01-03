@@ -29,7 +29,6 @@ public class GateController : MonoBehaviour
     {
         if (gate == null)
         {
-            Debug.LogError("Gate object is not assigned in GateController.");
             enabled = false;
             return;
         }
@@ -41,6 +40,15 @@ public class GateController : MonoBehaviour
         {
             lever.onLeverActivate.AddListener(OpenGate);
             lever.onLeverDeactivate.AddListener(CloseGate);
+
+            if (lever.value)
+            {
+                gate.transform.position = closedPosition;
+            }
+            else
+            {
+                gate.transform.position = openPosition;
+            }
         }
     }
 

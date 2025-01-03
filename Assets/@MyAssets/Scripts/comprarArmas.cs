@@ -42,6 +42,11 @@ public class comprarArmas : MonoBehaviour
         ActualizarDineroUI();
     }
 
+    void OnEnable()
+    {
+        ActualizarDineroUI();
+    }
+
     void SeleccionarOpcion(string opcion)
     {
         opcionSeleccionada = opcion;

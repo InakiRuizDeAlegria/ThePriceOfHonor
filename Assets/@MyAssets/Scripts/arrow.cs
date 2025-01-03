@@ -6,7 +6,7 @@ public class Arrow : MonoBehaviour
 {
     public float speed = 10f;
     public Transform tip;
-    public float danio = 15f;
+    public float danyo = 15f;
 
     private Rigidbody arrowRigidbody ;
     private bool inAir = false;
@@ -79,6 +79,7 @@ public class Arrow : MonoBehaviour
                     body.AddForce(arrowRigidbody .velocity, ForceMode.Impulse);
                 }
                 Stop();
+                StartCoroutine(FadeAndShrink());
             }
         }
     }
@@ -89,6 +90,35 @@ public class Arrow : MonoBehaviour
         SetPhysics(false);
         arrowParticleSystem.Stop();
         trailRenderer.emitting = false;
+    }
+
+    private IEnumerator FadeAndShrink()
+    {
+        float duration = 3f;
+        float elapsedTime = 0f;
+
+        Renderer arrowRenderer = GetComponentInChildren<Renderer>();
+        Material arrowMaterial = new Material(arrowRenderer.material);
+        arrowRenderer.material = arrowMaterial;
+
+        Color initialColor = arrowMaterial.color;
+        Vector3 initialScale = transform.localScale;
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+
+            transform.localScale = Vector3.Lerp(initialScale, Vector3.zero, t);
+
+            Color newColor = initialColor;
+            newColor.a = Mathf.Lerp(1f, 0f, t);
+            arrowMaterial.color = newColor;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 
     private void SetPhysics(bool usePhysics)
@@ -102,8 +132,7 @@ public class Arrow : MonoBehaviour
         Enemigo enemigo = other.GetComponent<Enemigo>();
         if (enemigo != null)
         {
-            enemigo.RecibirDanio(danio);
-            Destroy(gameObject);
+            enemigo.RecibirDanio(danyo);
         }
     }
 

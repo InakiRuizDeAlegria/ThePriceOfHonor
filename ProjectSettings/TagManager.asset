@@ -11,6 +11,7 @@ TagManager:
   - Espada
   - Arrow
   - flechaFuncional
+  - bow
   layers:
   - Default
   - TransparentFX

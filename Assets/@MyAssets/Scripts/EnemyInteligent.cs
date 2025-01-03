@@ -82,7 +82,6 @@ public class EnemyInteligent : MonoBehaviour
                 IA.SetDestination(portonObject.transform.position);
                 objetivoActual = portonObject;
 
-                // Si está quieto, ataca
                 bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
                 anim.SetBool("estaAtacando", estaQuieto);
                 anim.SetBool("esperando", false);
@@ -108,20 +107,17 @@ public class EnemyInteligent : MonoBehaviour
             IA.SetDestination(target.position);
             objetivoActual = target.gameObject;
 
-            // Comprobar si el aldeano está cerca del jugador
             float distanciaAlJugador = Vector3.Distance(transform.position, target.position);
-            bool estaCerca = distanciaAlJugador < 2f; // Ajusta la distancia según sea necesario
+            bool estaCerca = distanciaAlJugador < 2f;
 
             if (estaCerca)
             {
-                // Si está cerca y quieto, activar la animación de atacar
                 bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
                 anim.SetBool("estaAtacando", estaQuieto);
                 anim.SetBool("esperando", false);
             }
             else
             {
-                // Si está lejos, asegurarse de que esté corriendo
                 anim.SetBool("estaAtacando", false);
                 anim.SetBool("esperando", false);
             }
@@ -158,6 +154,15 @@ public class EnemyInteligent : MonoBehaviour
 
     public void Hit()
     {
+
+        if (objetivoActual != null && objetivoActual.CompareTag("Player"))
+        {
+            float distanciaAlJugador = Vector3.Distance(transform.position, objetivoActual.transform.position);
+            if (distanciaAlJugador > 2f)
+            {
+                return;
+            }
+        }
 
         if (audioSource != null && sonidoGolpe != null)
         {
@@ -257,9 +262,7 @@ public class EnemyInteligent : MonoBehaviour
         else
         {
             escondido = false;
-            Vector3 direccionAleatoria = transform.position + Random.insideUnitSphere * 10f;
-            anim.SetBool("aSidoVisto", true);
-            IA.SetDestination(direccionAleatoria);
+            IA.SetDestination(target.position);
         }
     }
 
