@@ -96,12 +96,6 @@ public class Arrow : MonoBehaviour
     {
         float duration = 3f;
         float elapsedTime = 0f;
-
-        Renderer arrowRenderer = GetComponentInChildren<Renderer>();
-        Material arrowMaterial = new Material(arrowRenderer.material);
-        arrowRenderer.material = arrowMaterial;
-
-        Color initialColor = arrowMaterial.color;
         Vector3 initialScale = transform.localScale;
 
         while (elapsedTime < duration)
@@ -109,11 +103,6 @@ public class Arrow : MonoBehaviour
             float t = elapsedTime / duration;
 
             transform.localScale = Vector3.Lerp(initialScale, Vector3.zero, t);
-
-            Color newColor = initialColor;
-            newColor.a = Mathf.Lerp(1f, 0f, t);
-            arrowMaterial.color = newColor;
-
             elapsedTime += Time.deltaTime;
             yield return null;
         }

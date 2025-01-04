@@ -254,6 +254,10 @@ public class EnemyInteligent : MonoBehaviour
 
         if (mejorEscondite != null)
         {
+            float distancia = Vector3.Distance(transform.position, mejorEscondite.position);
+            Debug.Log(distancia);
+            if (distancia <= 2) anim.SetBool("estaQuieto", true);
+            else anim.SetBool("estaQuieto", false);
             escondido = true;
             esconditeActual = mejorEscondite;
             anim.SetBool("aSidoVisto", true);

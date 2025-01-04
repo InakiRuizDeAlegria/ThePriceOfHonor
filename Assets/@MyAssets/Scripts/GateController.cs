@@ -6,19 +6,15 @@ using UnityEngine.XR.Content.Interaction;
 public class GateController : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("La palanca que controla el portón")]
     private XRLever lever;
 
     [SerializeField]
-    [Tooltip("El objeto que representa el portón")]
     private GameObject gate;
 
     [SerializeField]
-    [Tooltip("La altura a la que debe subir el portón cuando está activo")]
     private float openHeight = 5.0f;
 
     [SerializeField]
-    [Tooltip("La velocidad a la que se mueve el portón")]
     private float moveSpeed = 2.0f;
 
     private Vector3 closedPosition;

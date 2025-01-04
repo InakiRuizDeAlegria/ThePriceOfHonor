@@ -24,6 +24,27 @@ public class sliceObject : MonoBehaviour
 
     public void Slice(GameObject target)
     {
+
+        Transform parentOfParent = target.transform.parent?.parent;
+        if (parentOfParent == null)
+        {
+            Debug.Log("No se encontró el padre del padre del objeto cortado.");
+            return;
+        }
+
+        GameObject rootObject = parentOfParent.gameObject;
+
+        Enemigo enemigo = rootObject.GetComponent<Enemigo>();
+        if (enemigo != null)
+        {
+            Debug.Log("toca cortar");
+            enemigo.Cortar();
+        }
+        else
+        {
+            Debug.Log("El objeto padre del padre no tiene el script `Enemigo`.");
+        }
+
         SkinnedMeshRenderer skinnedRenderer = target.GetComponentInChildren<SkinnedMeshRenderer>();
         Mesh bakedMesh = new Mesh();
 
@@ -33,7 +54,7 @@ public class sliceObject : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("El objeto no tiene un SkinnedMeshRenderer.");
+            Debug.Log("El objeto no tiene un SkinnedMeshRenderer.");
             return;
         }
 
@@ -61,6 +82,7 @@ public class sliceObject : MonoBehaviour
         }
 
         Destroy(tempObject);
+        Destroy(rootObject);
     }
 
     public void SetupSlicedComponent(GameObject slicedObject, GameObject originalObject)
@@ -72,5 +94,27 @@ public class sliceObject : MonoBehaviour
         MeshCollider collider = slicedObject.AddComponent<MeshCollider>();
         collider.convex = true;
         rb.AddExplosionForce(cutForce, slicedObject.transform.position, 1);
+
+        StartCoroutine(FadeAndDestroy(slicedObject));
     }
+
+    private IEnumerator FadeAndDestroy(GameObject slicedObject)
+    {
+        float duration = 3.0f;
+        float elapsed = 0.0f;
+
+        Vector3 originalScale = slicedObject.transform.localScale;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            slicedObject.transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, t);
+
+            yield return null;
+        }
+
+        Destroy(slicedObject);
+    }
+
 }
