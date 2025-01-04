@@ -77,7 +77,7 @@ public class ComprarDefensas : MonoBehaviour
         }
     }
 
-    void ActualizarDineroUI()
+    public void ActualizarDineroUI()
     {
         textoDinero.text = $"Dinero: ${gestorMenu.dineroTotal}";
     }

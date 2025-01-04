@@ -101,7 +101,7 @@ public class comprarArmas : MonoBehaviour
         }
     }
 
-    void ActualizarDineroUI()
+    public void ActualizarDineroUI()
     {
         textoDinero.text = $"Dinero: ${gestorMenu.dineroTotal}";
     }

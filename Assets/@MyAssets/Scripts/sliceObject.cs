@@ -28,7 +28,6 @@ public class sliceObject : MonoBehaviour
         Transform parentOfParent = target.transform.parent?.parent;
         if (parentOfParent == null)
         {
-            Debug.Log("No se encontró el padre del padre del objeto cortado.");
             return;
         }
 
@@ -37,12 +36,7 @@ public class sliceObject : MonoBehaviour
         Enemigo enemigo = rootObject.GetComponent<Enemigo>();
         if (enemigo != null)
         {
-            Debug.Log("toca cortar");
             enemigo.Cortar();
-        }
-        else
-        {
-            Debug.Log("El objeto padre del padre no tiene el script `Enemigo`.");
         }
 
         SkinnedMeshRenderer skinnedRenderer = target.GetComponentInChildren<SkinnedMeshRenderer>();
@@ -54,7 +48,6 @@ public class sliceObject : MonoBehaviour
         }
         else
         {
-            Debug.Log("El objeto no tiene un SkinnedMeshRenderer.");
             return;
         }
 

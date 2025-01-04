@@ -34,6 +34,9 @@ public class SistemaOleadas : MonoBehaviour
     private bool estaIniciandoOleada = false;
 
     public MenuManagerTexto tienda;
+    public comprarArmas tiendaArmas;
+    public ComprarArmadura tiendaArmaduras;
+    public ComprarDefensas tiendaDefensas;
 
     public AudioSource audioSource;
     public AudioClip audioInicioOleada;
@@ -82,6 +85,9 @@ public class SistemaOleadas : MonoBehaviour
 
         int dineroGanado = dineroPorOleada * oleadaActual;
         tienda.dineroTotal += dineroGanado;
+        tiendaArmas.ActualizarDineroUI();
+        tiendaArmaduras.ActualizarDineroUI();
+        tiendaDefensas.ActualizarDineroUI();
     }
 
     void ReproducirAudioInicioOleada()

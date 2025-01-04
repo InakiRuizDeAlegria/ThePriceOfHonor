@@ -28218,6 +28218,9 @@ MonoBehaviour:
   tiempoEntreOleadas: 15
   dineroPorOleada: 100
   tienda: {fileID: 324342586691303908}
+  tiendaArmas: {fileID: 0}
+  tiendaArmaduras: {fileID: 0}
+  tiendaDefensas: {fileID: 0}
   audioSource: {fileID: 7583013984479172352}
   audioInicioOleada: {fileID: 8300000, guid: a8bf83e2fdd57d844960fe42f1d1517e, type: 3}
 --- !u!23 &3749408716877741480
@@ -49775,6 +49778,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1445887255199765330}
     m_Modifications:
+    - target: {fileID: 1622916624029963712, guid: 23256eab455bbdb44805d439943e586f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622916624029963712, guid: 23256eab455bbdb44805d439943e586f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622916624029963712, guid: 23256eab455bbdb44805d439943e586f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 4985143490422519422, guid: 23256eab455bbdb44805d439943e586f,
         type: 3}
       propertyPath: m_Volume
