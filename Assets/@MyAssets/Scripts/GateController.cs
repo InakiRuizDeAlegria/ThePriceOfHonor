@@ -34,12 +34,10 @@ public class GateController : MonoBehaviour
 
         if (lever != null)
         {
-            // Forzar que la palanca comience en la posición de cierre
             lever.value = false;
             lever.onLeverActivate.AddListener(OpenGate);
             lever.onLeverDeactivate.AddListener(CloseGate);
 
-            // Sincronizar la posición inicial del portón
             gate.transform.position = closedPosition;
         }
     }

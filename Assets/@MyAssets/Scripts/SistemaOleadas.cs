@@ -18,7 +18,7 @@ public class SistemaOleadas : MonoBehaviour
         public bool esInterior;
         public int cantidadInicial;
         public float probabilidad;
-        public int nivelRequerido; // Nivel en el que este enemigo comienza a aparecer
+        public int nivelRequerido;
     }
 
     public List<Zona> zonasExteriores;
@@ -72,7 +72,9 @@ public class SistemaOleadas : MonoBehaviour
             if (configuracion.nivelRequerido > nivelActual)
                 continue;
 
-            int cantidadDeEnemigos = configuracion.cantidadInicial + oleadaActual - 1;
+            int cantidadDeEnemigos = (nivelActual >= configuracion.nivelRequerido)
+                ? configuracion.cantidadInicial + (oleadaActual - configuracion.nivelRequerido)
+                : configuracion.cantidadInicial;
 
             Zona zonaSeleccionada = SeleccionarZona(configuracion.esInterior);
 

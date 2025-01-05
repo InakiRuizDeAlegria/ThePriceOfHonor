@@ -12,6 +12,8 @@ TagManager:
   - Arrow
   - flechaFuncional
   - bow
+  - teletransportadorBase
+  - teletransportadorMuro
   layers:
   - Default
   - TransparentFX
