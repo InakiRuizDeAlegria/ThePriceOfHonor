@@ -40,8 +40,6 @@ public class Enemigo : MonoBehaviour
         {
             enemigoInteligente.enabled = false;
         }
-
-        Destroy(gameObject);
     }
 
     public void RecibirDanio(float cantidad)

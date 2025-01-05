@@ -175,6 +175,9 @@ public class EnemyInteligent : MonoBehaviour
     {
         if (porton != null && porton.EstaActivo())
         {
+
+            Transform objetivoHijo = portonObject.transform.Find("posicionPorton");
+
             if (!enemigosAtacandoPorton.Contains(this) && enemigosAtacandoPorton.Count < 3)
             {
                 enemigosAtacandoPorton.Add(this);
@@ -183,7 +186,7 @@ public class EnemyInteligent : MonoBehaviour
 
             if (enemigosAtacandoPorton.Contains(this) && enemigosAtacandoPorton.IndexOf(this) < 3)
             {
-                IA.SetDestination(portonObject.transform.position);
+                IA.SetDestination(objetivoHijo.transform.position);
                 objetivoActual = portonObject;
 
                 bool estaQuieto = IA.velocity.sqrMagnitude < 0.01f;
@@ -282,16 +285,6 @@ public class EnemyInteligent : MonoBehaviour
 
     public void Hit()
     {
-
-        if (objetivoActual != null && objetivoActual.CompareTag("Player"))
-        {
-            float distanciaAlJugador = Vector3.Distance(transform.position, objetivoActual.transform.position);
-            if (distanciaAlJugador > 2f)
-            {
-                return;
-            }
-        }
-
         if (audioSource != null && sonidoGolpe != null)
         {
             audioSource.PlayOneShot(sonidoGolpe);

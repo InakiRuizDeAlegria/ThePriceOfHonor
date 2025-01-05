@@ -36,10 +36,8 @@ public class Porton : MonoBehaviour
         {
             vidaActual = vidaMaxima;
         }
-        Debug.Log(vidaActual);
         if (vidaActual > 0)
         {
-            Debug.Log("reactivado");
             ReactivarPorton();
         }
     }
