@@ -35,7 +35,7 @@ public class BarraVida : MonoBehaviour
 {
     if (ventanaMuerte.activeSelf && vrCamera != null)
     {
-        Vector3 posicionFrente = vrCamera.position + vrCamera.forward * 2.0f; // Ajusta la distancia si es necesario
+        Vector3 posicionFrente = vrCamera.position + vrCamera.forward * 2.0f;
         ventanaMuerte.transform.position = posicionFrente;
 
         ventanaMuerte.transform.rotation = Quaternion.LookRotation(vrCamera.forward);

@@ -30,11 +30,6 @@ public class Enemigo : MonoBehaviour
             GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         }
 
-        if (GetComponent<Collider>() != null)
-        {
-            GetComponent<Collider>().enabled = false;
-        }
-
         EnemyInteligent enemigoInteligente = GetComponent<EnemyInteligent>();
         if (enemigoInteligente != null)
         {

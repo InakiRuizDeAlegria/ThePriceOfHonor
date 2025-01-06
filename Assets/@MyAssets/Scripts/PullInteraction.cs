@@ -15,6 +15,9 @@ public class PullInteraction : XRBaseInteractable
     private IXRSelectInteractor pullingInteractor = null;
     private AudioSource audioSource;
 
+    public BarraVidaArma vidaArco;
+    public float danioPorUso = 10f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -35,6 +38,12 @@ public class PullInteraction : XRBaseInteractable
         notch.transform.localPosition = new Vector3(notch.transform.localPosition.x, notch.transform.localPosition.y, 0f);
         UpdateString();
         PlayReleaseSound();
+
+        if (vidaArco != null)
+        {
+            vidaArco.RecibirDanio(danioPorUso);
+        }
+
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
